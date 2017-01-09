@@ -188,9 +188,3 @@ Remember the objective of trocha is to avoid the use of repetitive or unmantenab
 ```
 
 `trocha.$RESOURCE` This routes tree (object like the `routes: {...}` you do) define how any resource will be created within this trocha object, you can modify this object if you want to create [Custom resources](#custom-resource)
-
-# 203 - Route definition parameters
-
-# 204 - Route printing parameters
-
-# 205 - Methods
