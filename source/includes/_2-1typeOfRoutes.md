@@ -279,11 +279,3 @@ This type of route can render an specific string independent of the name, it's u
 <aside class="warning">
 Note for `0.1.1` tag, alias print without the path function, this will change in future releases
 </aside>
-
-# 202 - Constants
-
-# 203 - Route definition parameters
-
-# 204 - Route printing parameters
-
-# 205 - Methods
