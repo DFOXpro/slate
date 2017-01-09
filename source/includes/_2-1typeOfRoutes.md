@@ -138,7 +138,7 @@ serverRoutes = trocha( {
 	routes: {
 		products: {
 			$type: trocha.RESOURCE, // Note this is String
-			$id: product_id
+			$id: 'product_id'
 		}
 	}
 });
@@ -163,7 +163,7 @@ serverRoutes = trocha {
 	routes:
 		products:
 			$type: trocha.RESOURCE # Note this is String
-			$id: product_id
+			$id: 'product_id'
 ```
 
 > This should generate:
