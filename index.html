@@ -464,7 +464,7 @@ Note  for `0.1.1` tag, alias print without the path function, this will change i
     <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">products</span><span class="p">:</span> <span class="p">{</span>
             <span class="na">$type</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">RESOURCE</span><span class="p">,</span> <span class="c1">// Note this is String</span>
-            <span class="na">$id</span><span class="p">:</span> <span class="nx">product_id</span>
+            <span class="na">$id</span><span class="p">:</span> <span class="s1">'product_id'</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
@@ -486,7 +486,7 @@ Note  for `0.1.1` tag, alias print without the path function, this will change i
     <span class="na">routes</span><span class="o">:</span>
         <span class="na">products</span><span class="o">:</span>
             <span class="na">$type</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">RESOURCE</span> <span class="c1"># Note this is String</span>
-            <span class="na">$id</span><span class="o">:</span> <span class="nx">product_id</span>
+            <span class="na">$id</span><span class="o">:</span> <span class="s">'product_id'</span>
 </code></pre>
 <blockquote>
 <p>This should generate:</p>
@@ -756,11 +756,173 @@ Remember the objective of trocha is to avoid the use of repetitive or unmantenab
 </span></code></pre>
 <p><code class="prettyprint">trocha.$RESOURCE</code> This routes tree (object like the <code class="prettyprint">routes: {...}</code> you do) define how any resource will be created within this trocha object, you can modify this object if you want to create <a href="#custom-resource">Custom resources</a></p>
 
-<h1 id="203-route-definition-parameters">203 - Route definition parameters</h1>
+          <h1 id="203-route-definition-parameters">203 - Route definition parameters</h1>
+
+<p>When you&rsquo;re creating your trocha object you can set some basic parameters so when a route need to be printed it will do with more or less content if you like.</p>
+
+<h2 id="routes-and-its-parameters">Routes and its parameters</h2>
+<pre class="highlight javascript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">home</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="na">people</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">$id</span><span class="p">:</span> <span class="s2">"name"</span><span class="p">,</span>
+            <span class="na">update</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">$hide</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="na">$method</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">PATCH</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="na">The</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">quick</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">brown</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">fox</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="na">jumps</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="na">over</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="na">the</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="na">lazy</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="na">dog</span><span class="p">:</span> <span class="p">{}}}}}}}}}</span>
+<span class="c1">// that's why I prefer coffeescript ;)</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">people</span><span class="p">.</span><span class="nx">update</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">people</span><span class="p">.</span><span class="nx">update</span><span class="p">.</span><span class="nx">$method</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">The</span><span class="p">.</span><span class="nx">quick</span><span class="p">.</span><span class="nx">brown</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">The</span><span class="p">.</span><span class="nx">quick</span><span class="p">.</span><span class="nx">brown</span><span class="p">.</span><span class="nx">fox</span><span class="p">.</span><span class="nx">jumps</span><span class="p">.</span><span class="nx">over</span><span class="p">.</span><span class="nx">the</span><span class="p">.</span><span class="nx">lazy</span><span class="p">.</span><span class="nx">dog</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">home</span><span class="o">:</span> <span class="p">{}</span>
+        <span class="na">people</span><span class="o">:</span>
+            <span class="na">$id</span><span class="o">:</span> <span class="s">"name"</span>
+            <span class="na">update</span><span class="o">:</span>
+                <span class="na">$hide</span><span class="o">:</span> <span class="no">true</span>
+                <span class="na">$method</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">PATCH</span>
+        <span class="na">The</span><span class="o">:</span>
+            <span class="na">quick</span><span class="o">:</span>
+                <span class="na">brown</span><span class="o">:</span>
+                    <span class="na">fox</span><span class="o">:</span>
+                        <span class="na">jumps</span><span class="o">:</span>
+                            <span class="na">over</span><span class="o">:</span>
+                                <span class="na">the</span><span class="o">:</span>
+                                    <span class="na">lazy</span><span class="o">:</span>
+                                        <span class="na">dog</span><span class="o">:</span> <span class="p">{}</span>
+<span class="c1"># that's why I prefer coffeescript ;)</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">people</span><span class="p">.</span><span class="na">update</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">people</span><span class="p">.</span><span class="na">update</span><span class="p">.</span><span class="na">$method</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">The</span><span class="p">.</span><span class="na">quick</span><span class="p">.</span><span class="na">brown</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">The</span><span class="p">.</span><span class="na">quick</span><span class="p">.</span><span class="na">brown</span><span class="p">.</span><span class="na">fox</span><span class="p">.</span><span class="na">jumps</span><span class="p">.</span><span class="na">over</span><span class="p">.</span><span class="na">the</span><span class="p">.</span><span class="na">lazy</span><span class="p">.</span><span class="na">dog</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>This should print:</p>
+</blockquote>
+<pre class="highlight shell"><code>/home
+/people/:name
+PATCH
+/The/quick/brown
+/The/quick/brown/fox/jumps/over/the/lazy/dog
+</code></pre>
+<p><code class="prettyprint">routes</code> is an optional(but recomended) object that define the entire routes tree of your trocha object.</p>
+
+<p>A trivial example: <code class="prettyprint">routes:{&lt;name&gt;:{...route parameters...}, &lt;name&gt;:&quot;&lt;alias&gt;&quot;}</code></p>
+
+<ul>
+<li><p>This routes tree can have has many routes child of any type has you like.</p></li>
+<li><p>If you want a route with a reserved name like <code class="prettyprint">/$id/</code> or <code class="prettyprint">/$name/</code> please see <a href="#$-and-customSelector">$ and customSelector</a></p></li>
+<li><p>Note the selector <code class="prettyprint">$</code> (<code class="prettyprint">$hide:</code> for example) is only used when you create the routes via JSON constructor, if you want to use the <a href="#via-method">Method creation</a> ignore the selector (use <code class="prettyprint">hide:</code> instead)</p></li>
+</ul>
+
+<p>Each route type suport diferent parameters, here a list on how to use:</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th>route</th>
+<th>resource</th>
+<th>scope</th>
+<th>alias</th>
+<th>Type</th>
+<th>What does</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$name (*)</td>
+<td>Mandatory</td>
+<td>Mandatory</td>
+<td>Mandatory</td>
+<td>Mandatory</td>
+<td>String</td>
+<td>the name of this part of the path</td>
+</tr>
+<tr>
+<td>$id</td>
+<td>Optional</td>
+<td>Mandatory</td>
+<td>NA</td>
+<td>NA</td>
+<td>String</td>
+<td>A modificable ID_name see <a href="#301-best-practices">Best practices</a></td>
+</tr>
+<tr>
+<td>$hide</td>
+<td>Optional</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>Bool</td>
+<td>Hide the actual name of this part of the path (ideal for indexs)</td>
+</tr>
+<tr>
+<td>$method</td>
+<td>Optional</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>String</td>
+<td>Define wich method will be used when requested this path</td>
+</tr>
+<tr>
+<td>$alias (*)</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>Mandatory</td>
+<td>String</td>
+<td>An String that replace the name</td>
+</tr>
+</tbody></table>
+
+<p>(*) Also note <code class="prettyprint">name</code> and <code class="prettyprint">alias</code> are only used when the route is defined vía method</p>
+
+<h2 id="and-customselector">$ and customSelector</h2>
+
+<h2 id="domain-amp-always-url">Domain &amp; Always Url</h2>
+<pre class="highlight javascript"><code><span class="nx">serverRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+    <span class="na">domain</span><span class="p">:</span> <span class="s1">'https://mydomain.net.co'</span><span class="p">,</span>
+    <span class="na">alwaysUrl</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">home</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">serverRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">serverRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">domain</span><span class="o">:</span> <span class="s">'https://mydomain.net.co'</span>
+    <span class="na">alwaysUrl</span><span class="o">:</span> <span class="no">true</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">home</span><span class="o">:</span> <span class="p">{}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">serverRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>This should print:</p>
+</blockquote>
+<pre class="highlight shell"><code>https://mydomain.net.co/home
+</code></pre>
+<p>You can set the domain of your routes via <code class="prettyprint">domain</code> constructor attribute and choice if you want to always print with <code class="prettyprint">alwaysUrl</code>, if you want to print the domain just fewer times see <a href="#url">url printing parameter</a>.</p>
+
+<p>This is very usefull when you&rsquo;re defining routes for a RESTful server.</p>
 
 <h1 id="204-route-printing-parameters">204 - Route printing parameters</h1>
 
-<h1 id="205-methods">205 - Methods</h1>
+<h1 id="205-methods-amp-attributes">205 - Methods &amp; attributes</h1>
 
           <h1 id="300-real-world-applications">300 - Real World applications</h1>
 
