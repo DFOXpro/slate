@@ -590,7 +590,171 @@ https://myRESTfulAPI.net.co/products/:product_id.json <span class="c"># delete</
 Note for <code class="prettyprint">0.1.1</code> tag, alias print without the path function, this will change in future releases
 </aside></p>
 
-<h1 id="202-constants">202 - Constants</h1>
+          <h1 id="202-constants">202 - Constants</h1>
+<pre class="highlight javascript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">trocha</span><span class="p">.</span><span class="nx">GET</span><span class="p">);</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">GET</span>
+</code></pre>
+<blockquote>
+<p>This should print:</p>
+</blockquote>
+<pre class="highlight shell"><code>GET
+</code></pre>
+<p>The Trocha constructor also offers a set of useful constants, to call those constants simply write <code class="prettyprint">trocha.&lt;CONST_NAME&gt;</code>.</p>
+
+<aside class="notice">
+Some constants have the prefix `$` this means it&rsquo;s not an String
+</aside>
+
+<h2 id="route-types-names">Route types names</h2>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">ROUTES</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
+    <span class="na">routes</span><span class="p">:{</span>
+        <span class="na">route_a</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">$type</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">ROUTE</span> <span class="c1">// Not necesary</span>
+        <span class="p">},</span>
+        <span class="na">route_b</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="na">scope</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">$type</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">SCOPE</span>
+        <span class="p">},</span>
+        <span class="na">resource</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">$type</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">RESOURCE</span>
+        <span class="p">},</span>
+        <span class="na">alias</span><span class="p">:</span> <span class="s2">"theAlias"</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">ROUTES</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">route_a</span><span class="o">:</span>
+            <span class="na">$type</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">ROUTE</span> <span class="c1"># Not necesary</span>
+        <span class="na">route_b</span><span class="o">:</span> <span class="p">{}</span>
+        <span class="na">scope</span><span class="o">:</span>
+            <span class="na">$type</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">SCOPE</span>
+        <span class="na">resource</span><span class="o">:</span>
+            <span class="na">$type</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">RESOURCE</span>
+        <span class="na">alias</span><span class="o">:</span> <span class="s">"theAlias"</span>
+<span class="p">}</span>
+</code></pre>
+<p>There are 4 type of routes implemented in trocha but only 2 route type names need to be use:</p>
+
+<ul>
+<li><code class="prettyprint">trocha.SCOPE</code></li>
+<li><code class="prettyprint">trocha.RESOURCE</code></li>
+</ul>
+
+<p>The other 2 can be defined via:</p>
+
+<ul>
+<li>Routes are the default type need no <code class="prettyprint">$type</code></li>
+<li>Alias can be initialized via a simple String</li>
+</ul>
+
+<p>See <a href="#201-type-of-routes">Type of routes</a>.</p>
+
+<h2 id="http-request-methods-names">HTTP request methods names</h2>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">ROUTES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">SERVER</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">({</span>
+        <span class="na">domain</span><span class="p">:</span> <span class="s1">'https://myRESTfulAPI.net.co'</span><span class="p">,</span>
+        <span class="na">alwaysUrl</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">routes</span><span class="p">:{</span>
+            <span class="na">users</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">login</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">$method</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">GET</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">};</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">ROUTES</span><span class="p">.</span><span class="na">SERVER</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">domain</span><span class="o">:</span> <span class="s">'https://myRESTfulAPI.net.co'</span>
+    <span class="na">alwaysUrl</span><span class="o">:</span> <span class="no">true</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">users</span><span class="o">:</span>
+            <span class="na">login</span><span class="o">:</span>
+                <span class="na">$method</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">GET</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>This should generate:</p>
+</blockquote>
+<pre class="highlight shell"><code>users.login:
+    url: https://myRESTfulAPI.net.co/users/login
+    method: GET
+</code></pre>
+<blockquote>
+<p>You can use this in Angular 1.X xhr calls, for example:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// some Angular 1.X code</span>
+<span class="nx">data</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">username</span><span class="p">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span>
+    <span class="na">password</span><span class="p">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">password</span>
+<span class="p">};</span>
+<span class="nx">$http</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="nx">SERVER</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">login</span><span class="p">.</span><span class="nx">path</span><span class="p">(),</span>
+    <span class="na">method</span><span class="p">:</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="nx">SERVER</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">login</span><span class="p">.</span><span class="nx">$method</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="nx">data</span>
+<span class="p">}</span> <span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Your amazing login success code</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Your amazing login fail code</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="c1"># some Angular 1.X code</span>
+<span class="nx">data</span><span class="p">.</span><span class="na">user</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">username</span><span class="o">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="na">data</span><span class="p">.</span><span class="na">user</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">()</span>
+    <span class="na">password</span><span class="o">:</span> <span class="nx">$scope</span><span class="p">.</span><span class="na">data</span><span class="p">.</span><span class="na">password</span>
+<span class="p">}</span>
+<span class="nx">$http</span><span class="p">({</span>
+    <span class="na">url</span><span class="o">:</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="na">SERVER</span><span class="p">.</span><span class="na">users</span><span class="p">.</span><span class="na">login</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+    <span class="na">method</span><span class="o">:</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="na">SERVER</span><span class="p">.</span><span class="na">users</span><span class="p">.</span><span class="na">login</span><span class="p">.</span><span class="na">$method</span>
+    <span class="na">data</span><span class="o">:</span> <span class="nx">data</span>
+<span class="p">}</span> <span class="p">).</span><span class="na">then</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="c1"># Your amazing login success code</span>
+<span class="p">,</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="c1"># Your amazing login fail code</span>
+</code></pre>
+<p>There are 9 HTTP request methods names implemented in trocha:</p>
+
+<ul>
+<li><code class="prettyprint">trocha.GET</code></li>
+<li><code class="prettyprint">trocha.POST</code></li>
+<li><code class="prettyprint">trocha.PATCH</code></li>
+<li><code class="prettyprint">trocha.DELETE</code></li>
+<li><code class="prettyprint">trocha.HEAD</code></li>
+<li><code class="prettyprint">trocha.PUT</code></li>
+<li><code class="prettyprint">trocha.CONNECT</code></li>
+<li><code class="prettyprint">trocha.OPTIONS</code></li>
+<li><code class="prettyprint">trocha.TRACE</code></li>
+</ul>
+
+<p>Those names are usefull when you&rsquo;re using the route object to point a RESTful server see <a href="#303-angular-1-x">Angular 1.X implentation</a>
+You can set/get the method name of any of your routes via the <code class="prettyprint">$method</code> param/attribute.
+Remember the objective of trocha is to avoid the use of repetitive or unmantenable Strings</p>
+
+<h2 id="resource-base-object">Resource base object</h2>
+<pre class="highlight javascript"><code><span class="p">(</span><span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">trocha</span><span class="p">.</span><span class="nx">$RESOURCE</span>
+<span class="p">})()</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="p">(</span><span class="o">-&gt;</span>
+    <span class="nx">trocha</span><span class="p">.</span><span class="na">$RESOURCE</span>
+<span class="p">)()</span>
+</code></pre>
+<blockquote>
+<p>This should return an object:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"$id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"edit"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nt">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"$hide"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"$id"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"new"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"$id"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"show"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"$hide"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code class="prettyprint">trocha.$RESOURCE</code> This routes tree (object like the <code class="prettyprint">routes: {...}</code> you do) define how any resource will be created within this trocha object, you can modify this object if you want to create <a href="#custom-resource">Custom resources</a></p>
 
 <h1 id="203-route-definition-parameters">203 - Route definition parameters</h1>
 
