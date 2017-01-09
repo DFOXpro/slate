@@ -20,16 +20,16 @@ sell.quantity
 > Objective code example
 
 ```javascript
-theRoute = myRoutes.product.buy.path({
+theRoute = myRoutes.product.buy.path( {
 	product_id: myProduct.id,
-	query: {quantity:sell.quantity}
+	query: {quantity: sell.quantity}
 });
 ```
 
 ```coffeescript
 theRoute = myRoutes.product.buy.path {
 	product_id: myProduct.id
-	query: {confirm:"true"}
+	query: {quantity: sell.quantity}
 }
 ```
 
@@ -38,5 +38,4 @@ This library take inspiration from Ruby routing system, where you describe the r
 
 # 100 - Contributing
 
-You can help me with this documentation editing/translating [here](https://github.com/DFOXpro/trocha/tree/develop/src/doc), or reporting issues [here](https://github.com/DFOXpro/trocha/issues), or improbe the source code [here](https://github.com/DFOXpro/trocha/tree/master/src).
-
+You can help me with this documentation editing/translating [here](https://github.com/DFOXpro/trocha-doc/tree/master/source/includes), or reporting issues [here](https://github.com/DFOXpro/trocha/issues), or improve the source code [here](https://github.com/DFOXpro/trocha/tree/develop/src).
