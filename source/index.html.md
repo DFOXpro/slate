@@ -35,4 +35,4 @@ see our [Hello Wolrd code example](#101-intro-to-trocha-js) to lear more.
 ### What it does not
 **handle** route/view for your app nor framework.
 
-For this implementation see [Implement with vanilla](#302-vanilla) or [Implement with Angular 1.X](http://localhost:4567/#303-angular-1-x)
+See [vanilla implementation](#302-vanilla) or [Angular 1.X implementation](http://localhost:4567/#303-angular-1-x)
