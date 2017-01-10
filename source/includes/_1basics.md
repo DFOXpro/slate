@@ -146,7 +146,6 @@ myRoutes._newAlias {
 ```
 
 This route definition mode can be used in any part of the code, also is usefull to change a route definition.
-
 <aside class="warning">
 Note `myRoutes` can't be `const`
 </aside>
@@ -199,8 +198,7 @@ myRoutes.faq #This will change for path()
 ```
 
 To print any of your routes simply use `path()` function at the end of the route.
-See [Route printing parameters](#2)
-
+See [Route printing parameters](#204-route-printing-parameters)
 <aside class="warning">
-Note  for `0.1.1` tag, alias print without the path function, this will change in future releases
+Note for `0.1.1` tag, alias print without the path function, this will change in future releases
 </aside>

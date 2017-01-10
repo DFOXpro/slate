@@ -15,7 +15,6 @@ GET
 ```
 
 The Trocha constructor also offers a set of useful constants, to call those constants simply write `trocha.<CONST_NAME>`.
-
 <aside class="notice">
 Some constants have the prefix `$` this means it's not an String
 </aside>
