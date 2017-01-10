@@ -134,7 +134,7 @@
 
 <p><strong>handle</strong> route/view for your app nor framework.</p>
 
-<p>For this implementation see <a href="#302-vanilla">Implement with vanilla</a> or <a href="http://localhost:4567/#303-angular-1-x">Implement with Angular 1.X</a></p>
+<p>See <a href="#302-vanilla">vanilla implementation</a> or <a href="http://localhost:4567/#303-angular-1-x">Angular 1.X implementation</a></p>
 
           <h1 id="99-why-this-library-exist">99 - Why this library exist</h1>
 
@@ -291,11 +291,10 @@
 <pre class="highlight shell"><code>/hello/:name
 /FrequentlyAskedQuestions <span class="c"># via myRoutes.faq</span>
 </code></pre>
-<p>This route definition mode can be used in any part of the code, also is usefull to change a route definition.</p>
-
+<p>This route definition mode can be used in any part of the code, also is usefull to change a route definition.
 <aside class="warning">
-Note `myRoutes` can&rsquo;t be `const`
-</aside>
+Note <code class="prettyprint">myRoutes</code> can&rsquo;t be <code class="prettyprint">const</code>
+</aside></p>
 
 <p>Avoid this way, please see <a href="#301-best-practices">Best practices</a> for depper explanation.</p>
 
@@ -340,11 +339,10 @@ Note `myRoutes` can&rsquo;t be `const`
 /FrequentlyAskedQuestions <span class="c"># via myRoutes.faq</span>
 </code></pre>
 <p>To print any of your routes simply use <code class="prettyprint">path()</code> function at the end of the route.
-See <a href="#2">Route printing parameters</a></p>
-
+See <a href="#204-route-printing-parameters">Route printing parameters</a>
 <aside class="warning">
-Note  for `0.1.1` tag, alias print without the path function, this will change in future releases
-</aside>
+Note for <code class="prettyprint">0.1.1</code> tag, alias print without the path function, this will change in future releases
+</aside></p>
 
           <h1 id="201-type-of-routes">201 - Type of routes</h1>
 
@@ -614,11 +612,10 @@ Note for <code class="prettyprint">0.1.1</code> tag, alias print without the pat
 </blockquote>
 <pre class="highlight shell"><code>GET
 </code></pre>
-<p>The Trocha constructor also offers a set of useful constants, to call those constants simply write <code class="prettyprint">trocha.&lt;CONST_NAME&gt;</code>.</p>
-
+<p>The Trocha constructor also offers a set of useful constants, to call those constants simply write <code class="prettyprint">trocha.&lt;CONST_NAME&gt;</code>.
 <aside class="notice">
-Some constants have the prefix `$` this means it&rsquo;s not an String
-</aside>
+Some constants have the prefix <code class="prettyprint">$</code> this means it&rsquo;s not an String
+</aside></p>
 
 <h2 id="route-types-names">Route types names</h2>
 <pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">ROUTES</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
@@ -775,7 +772,7 @@ Remember the objective of trocha is to avoid the use of repetitive or unmantenab
 
 <p>When you&rsquo;re creating your trocha object you can set some basic parameters so when a route need to be printed it will do with more or less content if you like.</p>
 
-<h2 id="routes-and-its-parameters">Routes and its parameters</h2>
+<h2 id="routes-amp-its-parameters">Routes &amp; its parameters</h2>
 <pre class="highlight javascript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
     <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">home</span><span class="p">:</span> <span class="p">{},</span>
@@ -908,7 +905,53 @@ PATCH
 
 <p>(*) Also note <code class="prettyprint">name</code> and <code class="prettyprint">alias</code> are only used when the route is defined vía method</p>
 
-<h2 id="and-customselector">$ and customSelector</h2>
+<h2 id="prefix-amp-postfix-string">Prefix &amp; postfix string</h2>
+<pre class="highlight javascript"><code><span class="nx">templateRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+    <span class="na">pre</span><span class="p">:</span> <span class="s1">'/templates'</span><span class="p">,</span> <span class="c1">// note the /</span>
+    <span class="na">post</span><span class="p">:</span> <span class="s1">'-myH45H.html'</span><span class="p">,</span>
+    <span class="na">alwaysPost</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">home</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">pre</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">ext</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> <span class="c1">//only if alwaysPost is not set</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">templateRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">pre</span><span class="o">:</span> <span class="s">'/templates'</span> <span class="c1"># note the /</span>
+    <span class="na">post</span><span class="o">:</span> <span class="s">'-myH45H.html'</span>
+    <span class="na">alwaysPost</span><span class="o">:</span> <span class="no">true</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">home</span><span class="o">:</span> <span class="p">{}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">pre</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">ext</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span> <span class="c1">#only if alwaysPost is not set</span>
+</code></pre>
+<blockquote>
+<p>This should print:</p>
+</blockquote>
+<pre class="highlight shell"><code>/home-myH45H.html
+/templates/home-myH45H.html
+/templates/home-myH45H.html
+</code></pre>
+<p>You can add Strings at the begining or end your path if you needed, for example if you need add an extention like <code class="prettyprint">.html</code> to all your routes simply add as a contructor attribute <code class="prettyprint">post: &quot;.html&quot;, alwaysPost: true,</code></p>
+
+<ul>
+<li><code class="prettyprint">pre</code> and <code class="prettyprint">post</code> Strings within the constructor object will be the defaults Strings for the entire routes tree.</li>
+<li>Those Strings does not compute any level(<code class="prettyprint">/</code>) so if you need it this must especify.</li>
+<li>Those Strings only compute once, example: <code class="prettyprint">&lt;pre&gt;/my/long/route&lt;post&gt;</code></li>
+<li>You can the the raw Strings of your Trocha object via <code class="prettyprint">$alwaysPost</code>, <code class="prettyprint">$post</code> and <code class="prettyprint">$pre</code> attributes</li>
+<li>If <code class="prettyprint">alwaysPost</code> is not set, you can print the <code class="prettyprint">pre</code> or <code class="prettyprint">post</code> String within the path function <code class="prettyprint">{pre:true,post:true}</code></li>
+<li>You can overide <code class="prettyprint">alwaysPost</code> within the path function <code class="prettyprint">{pre:false}</code></li>
+</ul>
+
+<aside class="notice">
+Avoid the use of <code>pre</code> if <code>domain</code> can be use
+</aside>
+
+<p>see <a href="#204-route-printing-parameters">Route printing parameters</a> for furter explanation</p>
+
+<h2 id="amp-customselector">$ &amp; customSelector</h2>
 
 <h2 id="domain-amp-always-url">Domain &amp; Always Url</h2>
 <pre class="highlight javascript"><code><span class="nx">serverRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
