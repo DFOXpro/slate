@@ -19,6 +19,7 @@ includes:
   - 2/03/1routeDefinitionParameters
   - 2/03/2domainAndAlwaysUrl
   - 2/03/3prefixAndPostfix
+  - 2/03/4customSelector
   - 2/04/1routePrintingParameters
   - 3integration
   - 4errors
