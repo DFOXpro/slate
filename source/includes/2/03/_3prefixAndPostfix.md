@@ -9,6 +9,7 @@ templateRoutes = trocha( {
 	}
 });
 console.log(templateRoutes.home.path());
+console.log(templateRoutes.home.path({post: false}));
 console.log(templateRoutes.home.path({pre: true}));
 console.log(templateRoutes.home.path({ext: true})); //only if alwaysPost is not set
 ```
@@ -21,6 +22,7 @@ templateRoutes = trocha {
 	routes:
 		home: {}
 console.log templateRoutes.home.path()
+console.log templateRoutes.home.path {post: false}
 console.log templateRoutes.home.path {pre: true}
 console.log templateRoutes.home.path {ext: true} #only if alwaysPost is not set
 ```
@@ -28,6 +30,7 @@ console.log templateRoutes.home.path {ext: true} #only if alwaysPost is not set
 
 ```shell
 /home-myH45H.html
+/home
 /templates/home-myH45H.html
 /templates/home-myH45H.html
 ```
@@ -39,9 +42,9 @@ You can add Strings at the begining or end your path if you needed, for example 
 * Those Strings only compute once, example: `<pre>/my/long/route<post>`
 * You can the the raw Strings of your Trocha object via `$alwaysPost`, `$post` and `$pre` attributes
 * If `alwaysPost` is not set, you can print the `pre` or `post` String within the path function `{pre:true,post:true}`
-* You can overide `alwaysPost` within the path function `{pre:false}`
+* You can overide `alwaysPost` within the path function `{post:false}`
+
+see [Route printing parameters](#204-route-printing-parameters) for furter explanation
 <aside class="notice">
 Avoid the use of `pre` if `domain` can be use
 </aside>
-
-see [Route printing parameters](#204-route-printing-parameters) for furter explanation
