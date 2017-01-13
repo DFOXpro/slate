@@ -905,7 +905,32 @@ PATCH
 
 <p>(*) Also note <code class="prettyprint">name</code> and <code class="prettyprint">alias</code> are only used when the route is defined vía method</p>
 
-<h2 id="prefix-amp-postfix-string">Prefix &amp; postfix string</h2>
+          <h2 id="domain-amp-always-url">Domain &amp; Always Url</h2>
+<pre class="highlight javascript"><code><span class="nx">serverRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+    <span class="na">domain</span><span class="p">:</span> <span class="s1">'https://mydomain.net.co'</span><span class="p">,</span>
+    <span class="na">alwaysUrl</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">home</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">serverRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">serverRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">domain</span><span class="o">:</span> <span class="s">'https://mydomain.net.co'</span>
+    <span class="na">alwaysUrl</span><span class="o">:</span> <span class="no">true</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">home</span><span class="o">:</span> <span class="p">{}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">serverRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>This should print:</p>
+</blockquote>
+<pre class="highlight shell"><code>https://mydomain.net.co/home
+</code></pre>
+<p>You can set the domain of your routes via <code class="prettyprint">domain</code> constructor attribute and choice if you want to always print with <code class="prettyprint">alwaysUrl</code>, if you want to print the domain just fewer times see <a href="#url">url printing parameter</a>.</p>
+
+<p>This is very usefull when you&rsquo;re defining routes for a RESTful server.</p>
+
+          <h2 id="prefix-amp-postfix-string">Prefix &amp; postfix string</h2>
 <pre class="highlight javascript"><code><span class="nx">templateRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
     <span class="na">pre</span><span class="p">:</span> <span class="s1">'/templates'</span><span class="p">,</span> <span class="c1">// note the /</span>
     <span class="na">post</span><span class="p">:</span> <span class="s1">'-myH45H.html'</span><span class="p">,</span>
@@ -942,43 +967,75 @@ PATCH
 <li>Those Strings only compute once, example: <code class="prettyprint">&lt;pre&gt;/my/long/route&lt;post&gt;</code></li>
 <li>You can the the raw Strings of your Trocha object via <code class="prettyprint">$alwaysPost</code>, <code class="prettyprint">$post</code> and <code class="prettyprint">$pre</code> attributes</li>
 <li>If <code class="prettyprint">alwaysPost</code> is not set, you can print the <code class="prettyprint">pre</code> or <code class="prettyprint">post</code> String within the path function <code class="prettyprint">{pre:true,post:true}</code></li>
-<li>You can overide <code class="prettyprint">alwaysPost</code> within the path function <code class="prettyprint">{pre:false}</code></li>
-</ul>
-
+<li>You can overide <code class="prettyprint">alwaysPost</code> within the path function <code class="prettyprint">{pre:false}</code>
 <aside class="notice">
-Avoid the use of <code>pre</code> if <code>domain</code> can be use
-</aside>
+Avoid the use of <code class="prettyprint">pre</code> if <code class="prettyprint">domain</code> can be use
+</aside></li>
+</ul>
 
 <p>see <a href="#204-route-printing-parameters">Route printing parameters</a> for furter explanation</p>
 
-<h2 id="amp-customselector">$ &amp; customSelector</h2>
-
-<h2 id="domain-amp-always-url">Domain &amp; Always Url</h2>
-<pre class="highlight javascript"><code><span class="nx">serverRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
-    <span class="na">domain</span><span class="p">:</span> <span class="s1">'https://mydomain.net.co'</span><span class="p">,</span>
-    <span class="na">alwaysUrl</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <h2 id="amp-customselector">$ &amp; customSelector</h2>
+<pre class="highlight javascript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+    <span class="na">customSelector</span><span class="p">:</span> <span class="s1">'TRCH'</span><span class="p">,</span>
     <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">home</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="na">hello</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">TRCHid</span><span class="p">:</span> <span class="s1">'name'</span><span class="p">,</span>
+            <span class="na">TRCHmethod</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">GET</span><span class="p">,</span>
+            <span class="na">$id</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">serverRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
-</code></pre><pre class="highlight coffeescript"><code><span class="nx">serverRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
-    <span class="na">domain</span><span class="o">:</span> <span class="s">'https://mydomain.net.co'</span>
-    <span class="na">alwaysUrl</span><span class="o">:</span> <span class="no">true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">hello</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="s1">'World'</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">hello</span><span class="p">.</span><span class="nx">TRCHid</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">hello</span><span class="p">.</span><span class="nx">$id</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">hello</span><span class="p">.</span><span class="nx">TRCHmethod</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">hello</span><span class="p">.</span><span class="nx">$id</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">customSelector</span><span class="o">:</span> <span class="s">'TRCH'</span>
     <span class="na">routes</span><span class="o">:</span>
-        <span class="na">home</span><span class="o">:</span> <span class="p">{}</span>
-<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">serverRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+        <span class="na">hello</span><span class="o">:</span>
+            <span class="na">TRCHid</span><span class="o">:</span> <span class="s">'name'</span>
+            <span class="na">TRCHmethod</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">GET</span>
+            <span class="na">$id</span><span class="o">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">hello</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">name</span><span class="o">:</span> <span class="s">'World'</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">hello</span><span class="p">.</span><span class="na">TRCHid</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">hello</span><span class="p">.</span><span class="na">$id</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">hello</span><span class="p">.</span><span class="na">TRCHmethod</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">hello</span><span class="p">.</span><span class="na">$id</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
 </code></pre>
 <blockquote>
 <p>This should print:</p>
 </blockquote>
-<pre class="highlight shell"><code>https://mydomain.net.co/home
+<pre class="highlight shell"><code>/hello/World
+name
+Object <span class="o">{</span>... trocha route object ...<span class="o">}</span>
+GET
+/hello/:name/<span class="nv">$id</span>
 </code></pre>
-<p>You can set the domain of your routes via <code class="prettyprint">domain</code> constructor attribute and choice if you want to always print with <code class="prettyprint">alwaysUrl</code>, if you want to print the domain just fewer times see <a href="#url">url printing parameter</a>.</p>
+<p>.
+<aside class="warning">
+Please dont use yet, see <a href="https://github.com/DFOXpro/trocha/issues/4">related bug</a>
+</aside></p>
 
-<p>This is very usefull when you&rsquo;re defining routes for a RESTful server.</p>
+<p>If you have a route like this <code class="prettyprint">/asd/$id/qwe</code> you will notice you can&rsquo;t directly set an <code class="prettyprint">$id</code> route name, thats because by default the JSON constructor use <code class="prettyprint">$</code> as a prefix to reserved names.</p>
 
-<h1 id="204-route-printing-parameters">204 - Route printing parameters</h1>
+<p>If you need to use it anyway, you can overide the selector, simply add <code class="prettyprint">customSelector: &#39;TRCH&#39;</code> to your inicializer object.
+<aside class="notice">
+Note when you use custom selector it apply boot in constructor object and all routes object, see <a href="#205_Methods_amp_attributes">Methods &amp; attributes</a>.
+</aside>
+<aside class="notice">
+Is recomended to use some acronym like <code class="prettyprint">TRCH</code> for example isntead of just one char (maybe noisy within your routes) or unicode (maybe crash in some browsers/precompilers).
+</aside>
+<aside class="warning">
+Avoid selectors like <code class="prettyprint">/</code> this one have many other meanings in URL&rsquo;s standar;</p>
+
+<p>also avoid <code class="prettyprint">_</code>, it&rsquo;s a separator within this library and
+finally any javascript variable illegal character like <code class="prettyprint">#</code>, <code class="prettyprint">\</code>, <code class="prettyprint">@</code>&hellip;
+</aside></p>
+
+          <h1 id="204-route-printing-parameters">204 - Route printing parameters</h1>
 
 <h1 id="205-methods-amp-attributes">205 - Methods &amp; attributes</h1>
 
