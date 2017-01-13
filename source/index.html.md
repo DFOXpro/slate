@@ -21,6 +21,7 @@ includes:
   - 2/03/3prefixAndPostfix
   - 2/03/4customSelector
   - 2/04/1routePrintingParameters
+  - 2/05/1methodsAndAttributes
   - 3integration
   - 4errors
   - 6licence

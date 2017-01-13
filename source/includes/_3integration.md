@@ -8,6 +8,8 @@ WIP :(
 
 # 303 - Angular 1.X
 
-# 304 - Node
+# 304 - JQuery
+
+# 305 - Node
 
 WIP :(
