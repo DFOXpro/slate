@@ -14,9 +14,12 @@ toc_footers:
 includes:
   - 0previous
   - 1basics
-  - 2-1typeOfRoutes
-  - 2-2constants
-  - 2-3routeDefinitionParameters
+  - 2/01typeOfRoutes
+  - 2/02constants
+  - 2/03/1routeDefinitionParameters
+  - 2/03/2domainAndAlwaysUrl
+  - 2/03/3prefixAndPostfix
+  - 2/04/1routePrintingParameters
   - 3integration
   - 4errors
   - 6licence
