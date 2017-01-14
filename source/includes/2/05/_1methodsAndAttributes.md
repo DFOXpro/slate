@@ -126,20 +126,78 @@ This attribute is really useful if you want to make XHR (ajax) calls, see [JQuer
 ### path
 `<route>.path({args})` See [Route printing parameters](#204-route-printing-parameters).
 
-### _new<Route type>
+### _new\<Route type\>
+```javascript
+let myRoutes = trocha();
+myRoutes._newRoute({
+	name: "person",
+	// Optionals
+	id: "name",
+	hide: true,
+	method: trocha.PUT
+});
+myRoutes._newScope({
+	name: "language",
+	// Optionals
+	id: "lng"
+});
+myRoutes._newResource({
+	name: "products",
+	id: "product_id",
+	// Optionals
+	resource: {
+		show: {},
+		list: {
+			$hide: true
+		}
+	}
+});
+myRoutes._newAlias({
+	name: "faq",
+	alias: "FrequentlyAskedQuestions"
+});
+```
+
+```coffeescript
+myRoutes = trocha()
+myRoutes._newRoute {
+	name: "person"
+	# Optionals
+	id: "name"
+	hide: true
+	method: trocha.PUT
+}
+myRoutes._newScope {
+	name: "language"
+	# Optionals
+	id: "lng"
+}
+myRoutes._newResource {
+	name: "products"
+	id: "product_id"
+	# Optionals
+	resource:
+		show: {}
+		list:
+			$hide: true
+}
+myRoutes._newAlias {
+	name: "faq"
+	alias: "FrequentlyAskedQuestions"
+}
+```
+
 This methods helps to create new child routes.
+<aside class="notice">
+Note it proccess same attributes of [Routes contructor attribute](#routes-amp-its-parameters) but without the selector.
+</aside>
+<aside class="warning">
+Note `myRoutes` can't be `const`
+</aside>
 
 * `<route>._newRoute({args})`
-* `<route>._newResource({args})`
+* `<route>._newResource({args})`: you can set a custom resource but you need to prefix with selector see [Custom-resource](#custom-resource)
 * `<route>._newScope({args})`
 * `<route>._newAlias({args})`
 
-          | route     | resource  | scope     | alias     | Type   | What does
---------- | --------- | --------- | --------- | --------- | ------ | -----------------
-name      | Mandatory | Mandatory | Mandatory | Mandatory | String | the name of this part of the path
-id        | Optional  | Mandatory | NA        | NA        | String | A modificable ID_name see [Best practices](#301-best-practices)
-hide      | Optional  | NA        | NA        | NA        | Bool   | Hide the actual name of this part of the path (ideal for indexs)
-method    | Optional  | NA        | NA        | NA        | String | Define wich method will be used when requested this path
-alias     | NA        | NA        | NA        | Mandatory | String | An String that replace the name
-
-See [Routes & its parameters](#routes-amp-its-parameters).
+Avoid this way, please see [Best practices](#301-best-practices) for depper explanation.
