@@ -34,7 +34,7 @@ theRoute = myRoutes.product.buy.path {
 ```
 
 
-This library take inspiration from Ruby routing system, where you describe the routes via a simple name tree and call those routes via dinamic function naming, preventing use of string in views and controllers.
+This library take inspiration from Ruby on Rails routing system, where you describe the routes via a simple name tree and call those routes via dinamic function naming, preventing use of string in views and controllers.
 
 # 100 - Contributing
 
