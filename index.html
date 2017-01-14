@@ -1039,37 +1039,94 @@ finally any javascript variable illegal character like <code class="prettyprint"
 </aside></p>
 
           <h1 id="204-route-printing-parameters">204 - Route printing parameters</h1>
-<pre class="highlight javascript"><code><span class="nx">templateRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+<pre class="highlight javascript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
     <span class="na">pre</span><span class="p">:</span> <span class="s1">'/templates'</span><span class="p">,</span> <span class="c1">// note the /</span>
     <span class="na">post</span><span class="p">:</span> <span class="s1">'-myH45H.html'</span><span class="p">,</span>
     <span class="na">domain</span><span class="p">:</span> <span class="s1">'https://mydomain.net.co'</span><span class="p">,</span>
     <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">home</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="na">town</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">$id</span><span class="p">:</span> <span class="s1">'town_name'</span><span class="p">,</span>
+            <span class="na">house</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">$id</span><span class="p">:</span> <span class="s1">'address'</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">post</span><span class="p">:</span> <span class="kc">false</span><span class="p">}));</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">pre</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">ext</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> <span class="c1">//only if alwaysPost is not set</span>
-</code></pre><pre class="highlight coffeescript"><code><span class="nx">templateRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> <span class="c1">//only if alwaysUrl is not set</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">pre</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">post</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> <span class="c1">//only if alwaysPost is not set</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">ext</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">hide</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">query</span><span class="p">:</span> <span class="p">{</span><span class="na">description</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="na">pictures</span><span class="p">:</span> <span class="mi">4</span><span class="p">}}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">fragment</span><span class="p">:</span> <span class="s1">'references'</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">parentId</span><span class="p">:</span> <span class="kc">false</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">id</span><span class="p">:</span> <span class="kc">false</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">house</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span>
+    <span class="na">town_name</span><span class="p">:</span> <span class="s1">'Sydney_NSW'</span><span class="p">,</span>
+    <span class="na">address</span><span class="p">:</span> <span class="s1">'P._Sherman_42_wallaby_way'</span>
+<span class="p">}));</span>
+
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
     <span class="na">pre</span><span class="o">:</span> <span class="s">'/templates'</span> <span class="c1"># note the /</span>
     <span class="na">post</span><span class="o">:</span> <span class="s">'-myH45H.html'</span>
-    <span class="na">alwaysPost</span><span class="o">:</span> <span class="no">true</span>
+    <span class="na">domain</span><span class="o">:</span> <span class="s">'https://mydomain.net.co'</span>
     <span class="na">routes</span><span class="o">:</span>
-        <span class="na">home</span><span class="o">:</span> <span class="p">{}</span>
-<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
-<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">post</span><span class="o">:</span> <span class="no">false</span><span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">pre</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">ext</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span> <span class="c1">#only if alwaysPost is not set</span>
+        <span class="na">town</span><span class="o">:</span>
+            <span class="na">$id</span><span class="o">:</span> <span class="s">'town_name'</span>
+            <span class="na">house</span><span class="o">:</span>
+                <span class="na">$id</span><span class="o">:</span> <span class="s">'address'</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">url</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span> <span class="c1"># only if alwaysUrl is not set</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">pre</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">post</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span> <span class="c1"># only if alwaysPost is not set</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">ext</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">hide</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">query</span><span class="o">:</span> <span class="p">{</span><span class="na">description</span><span class="o">:</span> <span class="no">true</span><span class="p">,</span> <span class="na">pictures</span><span class="o">:</span> <span class="mi">4</span><span class="p">}}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">fragment</span><span class="o">:</span> <span class="s">'references'</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">house</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">parentId</span><span class="o">:</span> <span class="no">false</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">house</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">id</span><span class="o">:</span> <span class="no">false</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">house</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span>
+    <span class="na">town_name</span><span class="o">:</span> <span class="s">'Sydney_NSW'</span>
+    <span class="na">address</span><span class="o">:</span> <span class="s">'P._Sherman_42_wallaby_way'</span>
+<span class="p">}</span>
 </code></pre>
 <blockquote>
 <p>This should print:</p>
 </blockquote>
-<pre class="highlight shell"><code>/home-myH45H.html
-/home
-/templates/home-myH45H.html
-/templates/home-myH45H.html
+<pre class="highlight shell"><code>/town/:town_name
+https://mydomain.net.co/town/:town_name
+/templates/town/:town_name
+/town/:town_name-myH45H.html
+/templates/town/:town_name-myH45H.html
+/:town_name
+/town/:town_name?description<span class="o">=</span><span class="nb">true</span>&amp;pictures<span class="o">=</span>4
+/town/:town_name#references
+/town/house/:address
+/town/:town_name/house
+/town/Sydney_NSW/house/P._Sherman_42_wallaby_way
 </code></pre>
+<p>After you define your routes the next think you wanna do is print those routes, to do that simply use the <code class="prettyprint">path({args})</code> at the end of your desire route.</p>
+
+<p>Parameters:</p>
+
+<ul>
+<li><code class="prettyprint">url: true</code> print domain if alwaysUrl is not set.</li>
+<li><code class="prettyprint">pre: true</code> print prefix.</li>
+<li><code class="prettyprint">post: &lt;Boolean&gt;</code> if <code class="prettyprint">post: true</code> print the postfix, if <code class="prettyprint">post: false</code>(note just <code class="prettyprint">false</code> not <code class="prettyprint">undefined</code> nor <code class="prettyprint">null</code> nor <code class="prettyprint">0</code>) will ignore alwaysPost route param.</li>
+<li><code class="prettyprint">ext: true</code> (extended) print prefix and postfix.</li>
+<li><code class="prettyprint">hide: true</code> Hide the last name of the path, if an id is setted it will appears anyway.</li>
+<li><code class="prettyprint">parentId: false</code> Hide the parent route id.</li>
+<li><code class="prettyprint">id: false</code> Hide the route id.</li>
+<li><code class="prettyprint">&lt;someId&gt;: String</code> set the value of some id of the rpute.</li>
+<li><code class="prettyprint">query: {&lt;attribute&gt;:&lt;value&gt;}</code> Print a define query <code class="prettyprint">?&lt;attribute&gt;=&lt;value&gt;&amp;...</code>.</li>
+<li><code class="prettyprint">fragment: String</code> Print the fragment <code class="prettyprint">#&lt;value&gt;</code>.</li>
+</ul>
+
+<aside class="notice">
+Note query attributes only support one level deep.
+</aside>
+
           <h1 id="205-methods-amp-attributes">205 - Methods &amp; attributes</h1>
 
 <p>When you create your own trocha object it offers a tree of routes objects where most of object offer a variety of methods/attributes. here the explanation what it does.
@@ -1189,76 +1246,78 @@ POST
 
 <p><code class="prettyprint">&lt;route&gt;.path({args})</code> See <a href="#204-route-printing-parameters">Route printing parameters</a>.</p>
 
-<h3 id="_new">_new<Route type></h3>
-
-<p>This methods helps to create new child routes.</p>
+<h3 id="_new-lt-route-type-gt">_new&lt;Route type&gt;</h3>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">();</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="nx">_newRoute</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s2">"person"</span><span class="p">,</span>
+    <span class="c1">// Optionals</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"name"</span><span class="p">,</span>
+    <span class="na">hide</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">method</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">PUT</span>
+<span class="p">});</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="nx">_newScope</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s2">"language"</span><span class="p">,</span>
+    <span class="c1">// Optionals</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"lng"</span>
+<span class="p">});</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="nx">_newResource</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s2">"products"</span><span class="p">,</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"product_id"</span><span class="p">,</span>
+    <span class="c1">// Optionals</span>
+    <span class="na">resource</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">show</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="na">list</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">$hide</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="nx">_newAlias</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s2">"faq"</span><span class="p">,</span>
+    <span class="na">alias</span><span class="p">:</span> <span class="s2">"FrequentlyAskedQuestions"</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">()</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="na">_newRoute</span> <span class="p">{</span>
+    <span class="na">name</span><span class="o">:</span> <span class="s">"person"</span>
+    <span class="c1"># Optionals</span>
+    <span class="na">id</span><span class="o">:</span> <span class="s">"name"</span>
+    <span class="na">hide</span><span class="o">:</span> <span class="no">true</span>
+    <span class="na">method</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">PUT</span>
+<span class="p">}</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="na">_newScope</span> <span class="p">{</span>
+    <span class="na">name</span><span class="o">:</span> <span class="s">"language"</span>
+    <span class="c1"># Optionals</span>
+    <span class="na">id</span><span class="o">:</span> <span class="s">"lng"</span>
+<span class="p">}</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="na">_newResource</span> <span class="p">{</span>
+    <span class="na">name</span><span class="o">:</span> <span class="s">"products"</span>
+    <span class="na">id</span><span class="o">:</span> <span class="s">"product_id"</span>
+    <span class="c1"># Optionals</span>
+    <span class="na">resource</span><span class="o">:</span>
+        <span class="na">show</span><span class="o">:</span> <span class="p">{}</span>
+        <span class="na">list</span><span class="o">:</span>
+            <span class="na">$hide</span><span class="o">:</span> <span class="no">true</span>
+<span class="p">}</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="na">_newAlias</span> <span class="p">{</span>
+    <span class="na">name</span><span class="o">:</span> <span class="s">"faq"</span>
+    <span class="na">alias</span><span class="o">:</span> <span class="s">"FrequentlyAskedQuestions"</span>
+<span class="p">}</span>
+</code></pre>
+<p>This methods helps to create new child routes.
+<aside class="notice">
+Note it proccess same attributes of <a href="#routes-amp-its-parameters">Routes contructor attribute</a> but without the selector.
+</aside>
+<aside class="warning">
+Note <code class="prettyprint">myRoutes</code> can&rsquo;t be <code class="prettyprint">const</code>
+</aside></p>
 
 <ul>
 <li><code class="prettyprint">&lt;route&gt;._newRoute({args})</code></li>
-<li><code class="prettyprint">&lt;route&gt;._newResource({args})</code></li>
+<li><code class="prettyprint">&lt;route&gt;._newResource({args})</code>: you can set a custom resource but you need to prefix with selector see <a href="#custom-resource">Custom-resource</a></li>
 <li><code class="prettyprint">&lt;route&gt;._newScope({args})</code></li>
-<li><p><code class="prettyprint">&lt;route&gt;._newAlias({args})</code></p>
-
-<table><thead>
-<tr>
-<th></th>
-<th>route</th>
-<th>resource</th>
-<th>scope</th>
-<th>alias</th>
-<th>Type</th>
-<th>What does</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>Mandatory</td>
-<td>Mandatory</td>
-<td>Mandatory</td>
-<td>Mandatory</td>
-<td>String</td>
-<td>the name of this part of the path</td>
-</tr>
-<tr>
-<td>id</td>
-<td>Optional</td>
-<td>Mandatory</td>
-<td>NA</td>
-<td>NA</td>
-<td>String</td>
-<td>A modificable ID_name see <a href="#301-best-practices">Best practices</a></td>
-</tr>
-<tr>
-<td>hide</td>
-<td>Optional</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>Bool</td>
-<td>Hide the actual name of this part of the path (ideal for indexs)</td>
-</tr>
-<tr>
-<td>method</td>
-<td>Optional</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>String</td>
-<td>Define wich method will be used when requested this path</td>
-</tr>
-<tr>
-<td>alias</td>
-<td>NA</td>
-<td>NA</td>
-<td>NA</td>
-<td>Mandatory</td>
-<td>String</td>
-<td>An String that replace the name</td>
-</tr>
-</tbody></table></li>
+<li><code class="prettyprint">&lt;route&gt;._newAlias({args})</code></li>
 </ul>
 
-<p>See <a href="#routes-amp-its-parameters">Routes &amp; its parameters</a>.</p>
+<p>Avoid this way, please see <a href="#301-best-practices">Best practices</a> for depper explanation.</p>
 
           <h1 id="300-real-world-applications">300 - Real World applications</h1>
 
