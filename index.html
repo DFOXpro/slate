@@ -940,6 +940,7 @@ PATCH
     <span class="p">}</span>
 <span class="p">});</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">post</span><span class="p">:</span> <span class="kc">false</span><span class="p">}));</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">pre</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">ext</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> <span class="c1">//only if alwaysPost is not set</span>
 </code></pre><pre class="highlight coffeescript"><code><span class="nx">templateRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
@@ -949,6 +950,7 @@ PATCH
     <span class="na">routes</span><span class="o">:</span>
         <span class="na">home</span><span class="o">:</span> <span class="p">{}</span>
 <span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">post</span><span class="o">:</span> <span class="no">false</span><span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">pre</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">ext</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span> <span class="c1">#only if alwaysPost is not set</span>
 </code></pre>
@@ -956,6 +958,7 @@ PATCH
 <p>This should print:</p>
 </blockquote>
 <pre class="highlight shell"><code>/home-myH45H.html
+/home
 /templates/home-myH45H.html
 /templates/home-myH45H.html
 </code></pre>
@@ -967,13 +970,13 @@ PATCH
 <li>Those Strings only compute once, example: <code class="prettyprint">&lt;pre&gt;/my/long/route&lt;post&gt;</code></li>
 <li>You can the the raw Strings of your Trocha object via <code class="prettyprint">$alwaysPost</code>, <code class="prettyprint">$post</code> and <code class="prettyprint">$pre</code> attributes</li>
 <li>If <code class="prettyprint">alwaysPost</code> is not set, you can print the <code class="prettyprint">pre</code> or <code class="prettyprint">post</code> String within the path function <code class="prettyprint">{pre:true,post:true}</code></li>
-<li>You can overide <code class="prettyprint">alwaysPost</code> within the path function <code class="prettyprint">{pre:false}</code>
-<aside class="notice">
-Avoid the use of <code class="prettyprint">pre</code> if <code class="prettyprint">domain</code> can be use
-</aside></li>
+<li>You can overide <code class="prettyprint">alwaysPost</code> within the path function <code class="prettyprint">{post:false}</code></li>
 </ul>
 
-<p>see <a href="#204-route-printing-parameters">Route printing parameters</a> for furter explanation</p>
+<p>see <a href="#204-route-printing-parameters">Route printing parameters</a> for furter explanation
+<aside class="notice">
+Avoid the use of <code class="prettyprint">pre</code> if <code class="prettyprint">domain</code> can be use
+</aside></p>
 
           <h2 id="amp-customselector">$ &amp; customSelector</h2>
 <pre class="highlight javascript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
@@ -1036,8 +1039,226 @@ finally any javascript variable illegal character like <code class="prettyprint"
 </aside></p>
 
           <h1 id="204-route-printing-parameters">204 - Route printing parameters</h1>
+<pre class="highlight javascript"><code><span class="nx">templateRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+    <span class="na">pre</span><span class="p">:</span> <span class="s1">'/templates'</span><span class="p">,</span> <span class="c1">// note the /</span>
+    <span class="na">post</span><span class="p">:</span> <span class="s1">'-myH45H.html'</span><span class="p">,</span>
+    <span class="na">domain</span><span class="p">:</span> <span class="s1">'https://mydomain.net.co'</span><span class="p">,</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">home</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">());</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">post</span><span class="p">:</span> <span class="kc">false</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">pre</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templateRoutes</span><span class="p">.</span><span class="nx">home</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">ext</span><span class="p">:</span> <span class="kc">true</span><span class="p">}));</span> <span class="c1">//only if alwaysPost is not set</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">templateRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">pre</span><span class="o">:</span> <span class="s">'/templates'</span> <span class="c1"># note the /</span>
+    <span class="na">post</span><span class="o">:</span> <span class="s">'-myH45H.html'</span>
+    <span class="na">alwaysPost</span><span class="o">:</span> <span class="no">true</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">home</span><span class="o">:</span> <span class="p">{}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">post</span><span class="o">:</span> <span class="no">false</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">pre</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">templateRoutes</span><span class="p">.</span><span class="na">home</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">ext</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span> <span class="c1">#only if alwaysPost is not set</span>
+</code></pre>
+<blockquote>
+<p>This should print:</p>
+</blockquote>
+<pre class="highlight shell"><code>/home-myH45H.html
+/home
+/templates/home-myH45H.html
+/templates/home-myH45H.html
+</code></pre>
+          <h1 id="205-methods-amp-attributes">205 - Methods &amp; attributes</h1>
 
-<h1 id="205-methods-amp-attributes">205 - Methods &amp; attributes</h1>
+<p>When you create your own trocha object it offers a tree of routes objects where most of object offer a variety of methods/attributes. here the explanation what it does.
+<aside class="notice">
+Note creation methods have <code class="prettyprint">_</code> prefix.</p>
+
+<p>Attributes have the default prefix <code class="prettyprint">$</code> to change see <a href="#amp-customselector">$ &amp; custom selector</a>.
+</aside></p>
+
+<h2 id="name">$name</h2>
+<pre class="highlight javascript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">country</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">state</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">city</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">town</span><span class="p">:</span> <span class="p">{}}}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">country</span><span class="p">.</span><span class="nx">$name</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">country</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">$name</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">country</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">city</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">$name</span><span class="p">);</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">country</span><span class="o">:</span>
+            <span class="na">state</span><span class="o">:</span>
+                <span class="na">city</span><span class="o">:</span>
+                    <span class="na">town</span><span class="o">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">country</span><span class="p">.</span><span class="na">$name</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">country</span><span class="p">.</span><span class="na">state</span><span class="p">.</span><span class="na">$name</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">country</span><span class="p">.</span><span class="na">state</span><span class="p">.</span><span class="na">city</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">$name</span>
+</code></pre>
+<blockquote>
+<p>This should print:</p>
+</blockquote>
+<pre class="highlight shell"><code>country
+state
+town
+</code></pre>
+<p><code class="prettyprint">&lt;selector&gt;name</code> Is a String, last child of the route.</p>
+
+<h2 id="as">$as</h2>
+<pre class="highlight javascript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">country</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">state</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">city</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">town</span><span class="p">:</span> <span class="p">{}}}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">country</span><span class="p">.</span><span class="nx">$as</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">country</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">$as</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myRoutes</span><span class="p">.</span><span class="nx">country</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">city</span><span class="p">.</span><span class="nx">town</span><span class="p">.</span><span class="nx">$as</span><span class="p">);</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">country</span><span class="o">:</span>
+            <span class="na">state</span><span class="o">:</span>
+                <span class="na">city</span><span class="o">:</span>
+                    <span class="na">town</span><span class="o">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">country</span><span class="p">.</span><span class="na">$as</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">country</span><span class="p">.</span><span class="na">state</span><span class="p">.</span><span class="na">$as</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">country</span><span class="p">.</span><span class="na">state</span><span class="p">.</span><span class="na">city</span><span class="p">.</span><span class="na">town</span><span class="p">.</span><span class="na">$as</span>
+</code></pre>
+<blockquote>
+<p>This should print:</p>
+</blockquote>
+<pre class="highlight shell"><code>country
+country_state
+country_state_city_town
+</code></pre>
+<p><code class="prettyprint">&lt;selector&gt;as</code> Is a String, concatenate parent names and it self. (to easy identify the route).</p>
+
+<p>This attribute is really useful if you want to declare controllers for your route handler like <a href="#303-angular-1-x">Angular</a>.
+<aside class="success">
+If you know the Ruby(language) Rails(framework) routes(gem) as(attribute) it works kind of alike when not defined ;).
+</aside></p>
+
+<h2 id="method">$method</h2>
+<pre class="highlight javascript"><code><span class="nx">serverRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">(</span> <span class="p">{</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">students</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">$method</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">GET</span><span class="p">,</span>
+            <span class="na">create</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">$method</span><span class="p">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="nx">POST</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">serverRoutes</span><span class="p">.</span><span class="nx">students</span><span class="p">.</span><span class="nx">$method</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">serverRoutes</span><span class="p">.</span><span class="nx">students</span><span class="p">.</span><span class="nx">create</span><span class="p">.</span><span class="nx">$method</span><span class="p">);</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="na">students</span><span class="o">:</span>
+            <span class="na">$method</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">GET</span>
+            <span class="na">create</span><span class="o">:</span>
+                <span class="na">$method</span><span class="o">:</span> <span class="nx">trocha</span><span class="p">.</span><span class="na">POST</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">students</span><span class="p">.</span><span class="na">$method</span>
+<span class="nx">console</span><span class="p">.</span><span class="na">log</span> <span class="nx">myRoutes</span><span class="p">.</span><span class="na">students</span><span class="p">.</span><span class="na">create</span><span class="p">.</span><span class="na">$method</span>
+</code></pre>
+<blockquote>
+<p>This should print:</p>
+</blockquote>
+<pre class="highlight shell"><code>GET
+POST
+</code></pre>
+<p><code class="prettyprint">&lt;selector&gt;method</code> Is a String, the desired method of this route. See <a href="#http-request-methods-names">Constants methods names</a> on how to set this String.</p>
+
+<p>This attribute is really useful if you want to make XHR (ajax) calls, see <a href="#304-JQuery">JQuery example</a>.</p>
+
+<h2 id="methods">Methods</h2>
+
+<h3 id="path">path</h3>
+
+<p><code class="prettyprint">&lt;route&gt;.path({args})</code> See <a href="#204-route-printing-parameters">Route printing parameters</a>.</p>
+
+<h3 id="_new">_new<Route type></h3>
+
+<p>This methods helps to create new child routes.</p>
+
+<ul>
+<li><code class="prettyprint">&lt;route&gt;._newRoute({args})</code></li>
+<li><code class="prettyprint">&lt;route&gt;._newResource({args})</code></li>
+<li><code class="prettyprint">&lt;route&gt;._newScope({args})</code></li>
+<li><p><code class="prettyprint">&lt;route&gt;._newAlias({args})</code></p>
+
+<table><thead>
+<tr>
+<th></th>
+<th>route</th>
+<th>resource</th>
+<th>scope</th>
+<th>alias</th>
+<th>Type</th>
+<th>What does</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Mandatory</td>
+<td>Mandatory</td>
+<td>Mandatory</td>
+<td>Mandatory</td>
+<td>String</td>
+<td>the name of this part of the path</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Optional</td>
+<td>Mandatory</td>
+<td>NA</td>
+<td>NA</td>
+<td>String</td>
+<td>A modificable ID_name see <a href="#301-best-practices">Best practices</a></td>
+</tr>
+<tr>
+<td>hide</td>
+<td>Optional</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>Bool</td>
+<td>Hide the actual name of this part of the path (ideal for indexs)</td>
+</tr>
+<tr>
+<td>method</td>
+<td>Optional</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>String</td>
+<td>Define wich method will be used when requested this path</td>
+</tr>
+<tr>
+<td>alias</td>
+<td>NA</td>
+<td>NA</td>
+<td>NA</td>
+<td>Mandatory</td>
+<td>String</td>
+<td>An String that replace the name</td>
+</tr>
+</tbody></table></li>
+</ul>
+
+<p>See <a href="#routes-amp-its-parameters">Routes &amp; its parameters</a>.</p>
 
           <h1 id="300-real-world-applications">300 - Real World applications</h1>
 
@@ -1049,7 +1270,9 @@ finally any javascript variable illegal character like <code class="prettyprint"
 
 <h1 id="303-angular-1-x">303 - Angular 1.X</h1>
 
-<h1 id="304-node">304 - Node</h1>
+<h1 id="304-jquery">304 - JQuery</h1>
+
+<h1 id="305-node">305 - Node</h1>
 
 <p>WIP :(</p>
 
