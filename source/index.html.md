@@ -22,7 +22,8 @@ includes:
   - 2/03/4customSelector
   - 2/04/1routePrintingParameters
   - 2/05/1methodsAndAttributes
-  - 3integration
+  - 3/00realWorldApplications
+  - 3/01bestPractices
   - 4errors
   - 6licence
 
