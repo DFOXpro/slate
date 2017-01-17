@@ -122,21 +122,22 @@
       <div class="content">
         <h1 id="trochajs">TrochaJS</h1>
 
-<p>It&rsquo;s a standalone javascript library that describe route listing.</p>
+<p>It&rsquo;s a standalone javascript library that describe route listing.
+Ideal for client-side route management and NodeJS route declaration.</p>
 
 <p>see our <a href="#101-intro-to-trocha-js">Hello Wolrd code example</a> to lear more.</p>
 
 <h3 id="what-it-does">What it does</h3>
 
-<p><strong>print</strong> clean routes for your javascript app and even help <code class="prettyprint">&lt;your favorite&gt;</code> framework to <strong>describe</strong> your app routes</p>
+<p><strong>print</strong> clean routes for your javascript projects and even help <code class="prettyprint">&lt;your favorite&gt;</code> framework to <strong>describe</strong> your app routes.</p>
 
 <h3 id="what-it-does-not">What it does not</h3>
 
 <p><strong>handle</strong> route/view for your app nor framework.</p>
 
-<p>See <a href="#302-vanilla">vanilla implementation</a> or <a href="http://localhost:4567/#303-angular-1-x">Angular 1.X implementation</a></p>
+<p>See <a href="#302-vanilla">vanilla implementation</a> or <a href="#304-angular-1-x">Angular 1.X implementation</a>.</p>
 
-          <h1 id="99-why-this-library-exist">99 - Why this library exist</h1>
+          <h1 id="98-why-this-library-exist">98 - Why this library exist</h1>
 
 <blockquote>
 <p>Ugly code example</p>
@@ -166,11 +167,13 @@
 </code></pre>
 <p>This library take inspiration from Ruby routing system, where you describe the routes via a simple name tree and call those routes via dinamic function naming, preventing use of string in views and controllers.</p>
 
-<h1 id="100-contributing">100 - Contributing</h1>
+<h1 id="99-contributing">99 - Contributing</h1>
 
 <p>You can help me with this documentation editing/translating <a href="https://github.com/DFOXpro/trocha-doc/tree/master/source/includes">here</a>, or reporting issues <a href="https://github.com/DFOXpro/trocha/issues">here</a>, or improve the source code <a href="https://github.com/DFOXpro/trocha/tree/develop/src">here</a>.</p>
 
-          <h1 id="101-intro-to-trocha-js">101 - Intro to Trocha JS</h1>
+          <h1 id="100-basics">100 - Basics</h1>
+
+<h1 id="101-intro-to-trocha-js">101 - Intro to Trocha JS</h1>
 
 <blockquote>
 <p>Insert the library within your page</p>
@@ -344,7 +347,9 @@ See <a href="#204-route-printing-parameters">Route printing parameters</a>
 Note for <code class="prettyprint">0.1.1</code> tag, alias print without the path function, this will change in future releases
 </aside></p>
 
-          <h1 id="201-type-of-routes">201 - Type of routes</h1>
+          <h1 id="200-api">200 - API</h1>
+
+<h1 id="201-type-of-routes">201 - Type of routes</h1>
 
 <p>There are 4 type of routes (see <a href="#202-constants">Constants</a>):</p>
 
@@ -736,7 +741,7 @@ Some constants have the prefix <code class="prettyprint">$</code> this means it&
 <li><code class="prettyprint">trocha.TRACE</code></li>
 </ul>
 
-<p>Those names are usefull when you&rsquo;re using the route object to point a RESTful server see <a href="#303-angular-1-x">Angular 1.X implentation</a>
+<p>Those names are usefull when you&rsquo;re using the route object to point a RESTful server see <a href="#304-angular-1-x">Angular 1.X implentation</a>
 You can set/get the method name of any of your routes via the <code class="prettyprint">$method</code> param/attribute.
 Remember the objective of trocha is to avoid the use of repetitive or unmantenable Strings</p>
 
@@ -1202,7 +1207,7 @@ country_state_city_town
 </code></pre>
 <p><code class="prettyprint">&lt;selector&gt;as</code> Is a String, concatenate parent names and it self. (to easy identify the route).</p>
 
-<p>This attribute is really useful if you want to declare controllers for your route handler like <a href="#303-angular-1-x">Angular</a>.
+<p>This attribute is really useful if you want to declare controllers for your route handler like <a href="#304-angular-1-x">Angular</a>.
 <aside class="success">
 If you know the Ruby(language) Rails(framework) routes(gem) as(attribute) it works kind of alike when not defined ;).
 </aside></p>
@@ -1238,7 +1243,7 @@ POST
 </code></pre>
 <p><code class="prettyprint">&lt;selector&gt;method</code> Is a String, the desired method of this route. See <a href="#http-request-methods-names">Constants methods names</a> on how to set this String.</p>
 
-<p>This attribute is really useful if you want to make XHR (ajax) calls, see <a href="#304-JQuery">JQuery example</a>.</p>
+<p>This attribute is really useful if you want to make XHR (ajax) calls, see <a href="#303-JQuery">JQuery example</a>.</p>
 
 <h2 id="methods">Methods</h2>
 
@@ -1321,15 +1326,213 @@ Note <code class="prettyprint">myRoutes</code> can&rsquo;t be <code class="prett
 
           <h1 id="300-real-world-applications">300 - Real World applications</h1>
 
-<h1 id="301-best-practices">301 - Best practices</h1>
+<p>Note the main goal of this library is to declare routes, not to handle.</p>
 
-<h1 id="302-vanilla">302 - Vanilla</h1>
+<h2 id="when-to-use">When to use</h2>
 
-<p>WIP :(</p>
+<ul>
+<li>When your web project implement extense Client-side routing.</li>
+<li>When your project make calls to a RESTful server.</li>
+<li>When your project is <strong>NodeJS</strong> server side rendered.</li>
+</ul>
 
-<h1 id="303-angular-1-x">303 - Angular 1.X</h1>
+<h2 id="when-do-not-use">When do not use</h2>
 
-<h1 id="304-jquery">304 - JQuery</h1>
+<ul>
+<li>When your project is server side rendered(PHP, Java, ASP, RoR), use backend framework route system instead.</li>
+<li>When you are looking <strong>ONLY</strong> for a client side route <em>handler</em>, like Angular or <a href="http://mtrpcic.net/pathjs/">pathjs</a></li>
+</ul>
+
+<h2 id="alternativeto-trochajs">Alternativeto TrochaJS</h2>
+
+<ul>
+<li>Server-side <a href="http://edgeguides.rubyonrails.org/routing.html">RoR Routes</a>. This system is the inspiration of this library.</li>
+<li>Client-side RoR, generates javascript file that defines all Rails named routes as javascript helpers <a href="https://github.com/railsware/js-routes">js-routes</a>. Note this compile <strong>entire</strong> routes.rb tree.</li>
+<li>Client-side ASP.NET MVC or WebForms routes from JavaScript <a href="https://github.com/Daniel15/RouteJs">RouteJs</a>.</li>
+</ul>
+
+          <h1 id="301-best-practices">301 - Best practices</h1>
+
+<h2 id="00-never-point-to-master">ñ00 Never point to master</h2>
+
+<blockquote>
+<p>BAD idea</p>
+</blockquote>
+<pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.rawgit.com/DFOXpro/trocha/master/dist/trocha.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+<blockquote>
+<p>GOOD idea</p>
+</blockquote>
+<pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.rawgit.com/DFOXpro/trocha/0.1.1/dist/trocha.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+<p>Wherever you use this library never point to master branch, use always an especific version of the library.</p>
+
+<p><strong>WHY?</strong></p>
+
+<p>Any change between versions (releases, revision, etc) may change the behavior of this library.</p>
+
+<h2 id="01-prefer-json-constructor">ñ01 Prefer JSON constructor</h2>
+
+<blockquote>
+<p>BAD idea</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">();</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="nx">_newRoute</span><span class="p">({</span><span class="nx">args</span><span class="p">...});</span>
+<span class="p">...</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">()</span>
+<span class="nx">myRoutes</span><span class="p">.</span><span class="na">_newRoute</span> <span class="p">{</span><span class="nx">args</span><span class="p">...}</span>
+<span class="p">...</span>
+</code></pre>
+<blockquote>
+<p>GOOD idea</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{...</span> <span class="nx">my</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span>
+    <span class="na">routes</span><span class="o">:</span> <span class="p">{...</span> <span class="na">my</span> <span class="nx">routes</span> <span class="p">...}</span>
+</code></pre>
+<p>Always use the JSON constructor to declarate the routes tree, avoid the creation methods.</p>
+
+<p><strong>WHY?</strong></p>
+
+<ul>
+<li>When using the creation methods your route can&rsquo;t be const and may be override later on.</li>
+<li>Using the creation methods you can ending with routes declarations in the entire project.</li>
+<li>Using the JSON contructor you can declare in just one place (file?) all your routes.</li>
+</ul>
+
+<h2 id="02-use-const">ñ02 Use const</h2>
+
+<blockquote>
+<p>BAD idea</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{...</span> <span class="nx">my</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span>
+    <span class="na">routes</span><span class="o">:</span> <span class="p">{...</span> <span class="na">my</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="p">...</span>
+</code></pre>
+<blockquote>
+<p>GOOD idea</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{...</span> <span class="nx">my</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="c1"># For coffeescript lets hope this feature and all es6 grammar became avalible :(</span>
+<span class="c1"># See: https://github.com/jashkenas/coffeescript/issues/3571</span>
+<span class="nx">__myRoutes</span> <span class="o">=</span> <span class="p">{...</span> <span class="na">my</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="o">`</span><span class="nx">const</span> <span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
+    <span class="na">routes</span><span class="o">:</span> <span class="nx">__myRoutes</span>
+<span class="p">});</span>
+<span class="o">`</span>
+<span class="k">delete</span> <span class="nx">__myRoutes</span>
+</code></pre>
+<p>Use variable type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const">const</a></p>
+
+<p><strong>WHY?</strong></p>
+
+<ul>
+<li>This is a well supported ES6 feature (even IE11 support this).</li>
+<li>This prevent later on override.</li>
+</ul>
+
+<h2 id="03-use-diferent-trocha-objects-to-diferent-route-scopes">ñ03 Use diferent trocha objects to diferent route scopes</h2>
+
+<blockquote>
+<p>BAD idea</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nx">client</span> <span class="nx">routes</span> <span class="p">...</span>
+        <span class="nx">serverA</span> <span class="nx">routes</span> <span class="p">...</span>
+        <span class="nx">serverB</span> <span class="nx">routes</span> <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span>
+    <span class="na">routes</span><span class="o">:</span>
+        <span class="nx">client</span> <span class="nx">routes</span> <span class="p">...</span>
+        <span class="nx">serverA</span> <span class="nx">routes</span> <span class="p">...</span>
+        <span class="nx">serverB</span> <span class="nx">routes</span> <span class="p">...</span>
+</code></pre>
+<blockquote>
+<p>GOOD idea</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">clientRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
+    <span class="na">pre</span><span class="p">:</span> <span class="s1">'/the/templates/route'</span><span class="p">,</span>
+    <span class="na">post</span><span class="p">:</span> <span class="s1">'_the_hash_and_ext.html'</span><span class="p">,</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{...</span> <span class="nx">client</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="p">});</span>
+<span class="kr">const</span> <span class="nx">serverARoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
+    <span class="na">domain</span><span class="p">:</span> <span class="s1">'https://api.serverA.net.co/'</span><span class="p">,</span>
+    <span class="na">alwaysUrl</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{...</span> <span class="nx">serverA</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="p">});</span>
+<span class="kr">const</span> <span class="nx">serverBRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
+    <span class="na">domain</span><span class="p">:</span> <span class="s1">'https://api.serverB.net.co/'</span><span class="p">,</span>
+    <span class="na">alwaysUrl</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">routes</span><span class="p">:</span> <span class="p">{...</span> <span class="nx">serverB</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">clientRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">pre</span><span class="o">:</span> <span class="s">'/the/templates/route'</span>
+    <span class="na">post</span><span class="o">:</span> <span class="s">'_the_hash_and_ext.html'</span>
+    <span class="na">routes</span><span class="o">:</span> <span class="p">{...</span> <span class="na">client</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="nx">serverARoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">domain</span><span class="o">:</span> <span class="s">'https://api.serverA.net.co/'</span>
+    <span class="na">alwaysUrl</span><span class="o">:</span> <span class="no">true</span>
+    <span class="na">routes</span><span class="o">:</span> <span class="p">{...</span> <span class="na">serverA</span> <span class="nx">routes</span> <span class="p">...}</span>
+<span class="nx">serverBRoutes</span> <span class="o">=</span> <span class="nx">trocha</span> <span class="p">{</span>
+    <span class="na">domain</span><span class="o">:</span> <span class="s">'https://api.serverB.net.co/'</span>
+    <span class="na">alwaysUrl</span><span class="o">:</span> <span class="no">true</span>
+    <span class="na">routes</span><span class="o">:</span> <span class="p">{...</span> <span class="na">serverB</span> <span class="nx">routes</span> <span class="p">...}</span>
+</code></pre>
+<p>If your project access to RESTful apis declare a trocha object per server, also use an exclusive object for client views</p>
+
+          <h1 id="302-vanilla">302 - Vanilla</h1>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">handleRoute</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Your awesome route handle</span>
+<span class="p">};</span>
+
+<span class="kr">const</span> <span class="nx">replaceHref</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">forEach</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"a"</span><span class="p">),</span> <span class="p">(</span><span class="nx">link</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">link</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">href</span><span class="p">){</span>
+            <span class="nx">link</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span>
+                <span class="s2">"clientRoutes."</span> <span class="o">+</span>
+                <span class="nx">link</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">href</span>
+            <span class="p">).</span><span class="nx">path</span><span class="p">(</span>
+                <span class="nx">link</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">path</span> <span class="p">?</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">link</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span> <span class="p">:</span> <span class="p">{}</span>
+            <span class="p">);</span>
+            <span class="nx">link</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">handleRoute</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">};</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">replaceHref</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">handleRoute</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="c1"># Your awesome route handle</span>
+
+<span class="nx">replaceHref</span> <span class="o">=</span> <span class="o">-&gt;</span>
+    <span class="nb">Array</span><span class="p">.</span><span class="na">prototype</span><span class="p">.</span><span class="na">forEach</span><span class="p">.</span><span class="na">call</span> <span class="nb">document</span><span class="p">.</span><span class="na">getElementsByTagName</span><span class="p">(</span><span class="s">"a"</span><span class="p">),</span> <span class="p">(</span><span class="nx">link</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="k">if</span> <span class="nx">link</span><span class="p">.</span><span class="na">dataset</span><span class="p">.</span><span class="na">href</span>
+            <span class="nx">link</span><span class="p">.</span><span class="na">href</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span>
+                <span class="s">"clientRoutes."</span> <span class="o">+</span> <span class="nx">link</span><span class="p">.</span><span class="na">dataset</span><span class="p">.</span><span class="na">href</span>
+            <span class="p">).</span><span class="na">path</span><span class="p">(</span>
+                <span class="o">`</span><span class="nx">link</span><span class="p">.</span><span class="na">dataset</span><span class="p">.</span><span class="na">path</span> <span class="o">?</span> <span class="nx">JSON</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="nx">link</span><span class="p">.</span><span class="na">dataset</span><span class="p">.</span><span class="na">path</span><span class="p">)</span> <span class="o">:</span> <span class="p">{}</span><span class="o">`</span>
+            <span class="p">)</span>
+            <span class="nx">link</span><span class="p">.</span><span class="na">onclick</span> <span class="o">=</span> <span class="nx">handleRoute</span>
+<span class="nb">window</span><span class="p">.</span><span class="na">onload</span> <span class="o">=</span> <span class="o">-&gt;</span>
+    <span class="nx">replaceHref</span><span class="p">()</span>
+</code></pre>
+<p>If you want to use this library with <a href="http://vanilla-js.com/">Vanilla JS</a>(my fav framework ;)) I recomend you to use <a href="http://mtrpcic.net/pathjs/">pathjs</a> to route handle.
+<a href="examples/vanilla.html">SEE  TRIVIAL EXAMPLE HERE</a></p>
+
+<p>In this example we write the links <code class="prettyprint">&lt;a&gt;</code> href via onload function</p>
+
+<h1 id="303-jquery">303 - JQuery</h1>
+
+<h1 id="304-angular-1-x">304 - Angular 1.X</h1>
 
 <h1 id="305-node">305 - Node</h1>
 
