@@ -1,4 +1,4 @@
-# 99 - Why this library exist
+# 98 - Why this library exist
 > Ugly code example
 
 ```javascript
@@ -36,6 +36,6 @@ theRoute = myRoutes.product.buy.path {
 
 This library take inspiration from Ruby routing system, where you describe the routes via a simple name tree and call those routes via dinamic function naming, preventing use of string in views and controllers.
 
-# 100 - Contributing
+# 99 - Contributing
 
 You can help me with this documentation editing/translating [here](https://github.com/DFOXpro/trocha-doc/tree/master/source/includes), or reporting issues [here](https://github.com/DFOXpro/trocha/issues), or improve the source code [here](https://github.com/DFOXpro/trocha/tree/develop/src).
