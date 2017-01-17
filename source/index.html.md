@@ -24,6 +24,7 @@ includes:
   - 2/05/1methodsAndAttributes
   - 3/00realWorldApplications
   - 3/01bestPractices
+  - 3/02vanilla
   - 4errors
   - 6licence
 
@@ -42,4 +43,4 @@ see our [Hello Wolrd code example](#101-intro-to-trocha-js) to lear more.
 ### What it does not
 **handle** route/view for your app nor framework.
 
-See [vanilla implementation](#302-vanilla) or [Angular 1.X implementation](http://localhost:4567/#303-angular-1-x)
+See [vanilla implementation](#302-vanilla) or [Angular 1.X implementation](#304-angular-1-x).

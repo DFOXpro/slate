@@ -80,7 +80,7 @@ country_state_city_town
 ```
 `<selector>as` Is a String, concatenate parent names and it self. (to easy identify the route).
 
-This attribute is really useful if you want to declare controllers for your route handler like [Angular](#303-angular-1-x).
+This attribute is really useful if you want to declare controllers for your route handler like [Angular](#304-angular-1-x).
 <aside class="success">
 If you know the Ruby(language) Rails(framework) routes(gem) as(attribute) it works kind of alike when not defined ;).
 </aside>
@@ -120,7 +120,7 @@ POST
 ```
 `<selector>method` Is a String, the desired method of this route. See [Constants methods names](#http-request-methods-names) on how to set this String.
 
-This attribute is really useful if you want to make XHR (ajax) calls, see [JQuery example](#304-JQuery).
+This attribute is really useful if you want to make XHR (ajax) calls, see [JQuery example](#303-JQuery).
 
 ## Methods
 ### path

@@ -149,7 +149,7 @@ There are 9 HTTP request methods names implemented in trocha:
 * `trocha.OPTIONS`
 * `trocha.TRACE`
 
-Those names are usefull when you're using the route object to point a RESTful server see [Angular 1.X implentation](#303-angular-1-x)
+Those names are usefull when you're using the route object to point a RESTful server see [Angular 1.X implentation](#304-angular-1-x)
 You can set/get the method name of any of your routes via the `$method` param/attribute.
 Remember the objective of trocha is to avoid the use of repetitive or unmantenable Strings
 
