@@ -24,7 +24,7 @@ includes:
   - 2/05/1methodsAndAttributes
   - 3/00realWorldApplications
   - 3/01bestPractices
-  - 3/02vanilla
+  - 3/02-3-4examples
   - 4errors
   - 6licence
 
