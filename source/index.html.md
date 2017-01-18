@@ -22,7 +22,9 @@ includes:
   - 2/03/4customSelector
   - 2/04/1routePrintingParameters
   - 2/05/1methodsAndAttributes
-  - 3integration
+  - 3/00realWorldApplications
+  - 3/01bestPractices
+  - 3/02vanilla
   - 4errors
   - 6licence
 
@@ -31,13 +33,14 @@ search: true
 
 # TrochaJS
 It's a standalone javascript library that describe route listing.
+Ideal for client-side route management and NodeJS route declaration.
 
 see our [Hello Wolrd code example](#101-intro-to-trocha-js) to lear more.
 
 ### What it does
-**print** clean routes for your javascript app and even help `<your favorite>` framework to **describe** your app routes
+**print** clean routes for your javascript projects and even help `<your favorite>` framework to **describe** your app routes.
 
 ### What it does not
 **handle** route/view for your app nor framework.
 
-See [vanilla implementation](#302-vanilla) or [Angular 1.X implementation](http://localhost:4567/#303-angular-1-x)
+See [vanilla implementation](#302-vanilla) or [Angular 1.X implementation](#304-angular-1-x).

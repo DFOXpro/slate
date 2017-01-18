@@ -1,3 +1,4 @@
+# 200 - API
 # 201 - Type of routes
 
 There are 4 type of routes (see [Constants](#202-constants)):

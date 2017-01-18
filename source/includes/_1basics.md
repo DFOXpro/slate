@@ -1,3 +1,4 @@
+# 100 - Basics
 # 101 - Intro to Trocha JS
 
 > Insert the library within your page
