@@ -27,9 +27,10 @@
 
 	const printMessage = (event) => {
 		event.preventDefault();
-		document.getElementById("message").textContent = 'Hi from: ' + event.target.href
+		document.getElementById("message").textContent = 'Hi! from: ' + event.target.href
 	};
 
+	// This function is the core of this example
 	const replaceHref = () => {
 		Array.prototype.forEach.call(document.getElementsByTagName("a"), (link) => {
 			if(link.dataset.href){
@@ -43,6 +44,7 @@
 			}
 		});
 	};
+
 	window.onload = () => {
 		replaceHref();
 	}

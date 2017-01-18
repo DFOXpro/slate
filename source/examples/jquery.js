@@ -1,4 +1,5 @@
 (() => {
+	let lastRoute = '';
 	const REST_RESOURCE = {
 		$id: "id",
 		update: {
@@ -17,13 +18,14 @@
 		}
 	};
 	const serverRoutes = trocha({
-		domain:'http://jsonplaceholder.typicode.com',
+		domain:'https://jsonplaceholder.typicode.com',
 		alwaysUrl: true,
 		resource: REST_RESOURCE,
 		routes: {
 			posts: {
 				$type: trocha.RESOURCE,
-				$id: 'postId'
+				$id: 'postId',
+				comments: {}
 			},
 			users: {
 				$type: trocha.RESOURCE,
@@ -32,21 +34,29 @@
 		}
 	});
 
+	// This function is the core of this example
 	const doJqueryXHR = (route, path, data) => {
+		lastRoute = route.path(path);
 		return $.ajax({
 			method: route.$method,
-			url: route.path(path),
+			url: lastRoute,
 			data: data
 		})
 	};
 
-	const printMessage = ( msg ) => {
-		console.log(JSON.stringify(msg));
+	const printMessage = (msg) => {
+		$("#from span").text(lastRoute);
 		$("#message").text(JSON.stringify(msg))
 	}
 
-	$( document ).ready(() => {
-		$( "#getPost" ).on( "click", ( event ) => doJqueryXHR(serverRoutes.posts.show,{postId: 1}).done(printMessage));
-		$( "#getUser" ).on( "click", ( event ) => doJqueryXHR(serverRoutes.users.show,{userId: 1}).done(printMessage));
+	$(document).ready(() => {
+		$("#getUsers").on("click", ( event ) => doJqueryXHR(serverRoutes.users.list).done(printMessage));
+		$("#getPost").on("click", ( event ) => doJqueryXHR(serverRoutes.posts.show, {postId: 1}).done(printMessage));
+		$("#getComments").on("click", ( event ) => doJqueryXHR(serverRoutes.posts.comments, {
+			postId: 1,
+			query: {
+				userId: 1
+			}
+		}).done(printMessage));
 	})
 })();
