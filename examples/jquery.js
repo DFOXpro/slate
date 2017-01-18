@@ -18,8 +18,7 @@
 		}
 	};
 	const serverRoutes = trocha({
-		//domain:'https://jsonplaceholder.typicode.com',
-		domain:'http://jsonplaceholder.typicode.com',// quick test
+		domain:'https://jsonplaceholder.typicode.com',
 		alwaysUrl: true,
 		resource: REST_RESOURCE,
 		routes: {
