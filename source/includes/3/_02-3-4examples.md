@@ -79,6 +79,106 @@ doJqueryXHR(serverRoutes.posts.show,{args},{data}).done succcesAction
 In this example we use an ajax helper that include the route, the path parameters and the data it will send if any.
 
 # 304 - Angular 1.X
+> The factory where we include trocha to our Angular project
+
+```javascript
+app.factory('$trocha', [
+	'$http',
+	($http) => {
+		var $trocha = trocha;
+		$trocha.CLIENT = ROUTES.CLIENT;
+		$trocha.SERVER = ROUTES.SERVER;
+		$trocha.xhr = (route, path, data) => {
+			let args = {
+				url: route.path(path),
+				method: route.$method
+			}
+			if(data) args.data = data;
+			return $http(args);
+		}
+		return $trocha;
+	}
+]);
+```
+```coffeescript
+app.factory '$trocha', [
+	'$http',
+	($http) ->
+		$trocha = trocha;
+		$trocha.CLIENT = ROUTES.CLIENT
+		$trocha.SERVER = ROUTES.SERVER
+		$trocha.xhr = (route, path, data) ->
+			args =
+				url: route.path path
+				method: route.$method
+			args.data = data if data
+			$http args
+		$trocha
+]
+```
+
+> The ngRoute config
+
+```javascript
+app.config([
+	'$routeProvider'
+	($routeProvider) => {
+		$routeProvider.when(ROUTES.CLIENT.the.client.route.path(), {
+			templateUrl: ROUTES.CLIENT.the.client.route.path({ext: true}),
+			controller: ROUTES.CLIENT.the.client.route.$as
+		})
+	}
+]);
+```
+```coffeescript
+app.config [
+	'$routeProvider'
+	($routeProvider) ->
+		$routeProvider.when ROUTES.CLIENT.the.client.route.path(),
+			templateUrl: ROUTES.CLIENT.the.client.route.path {ext: true}
+			controller: ROUTES.CLIENT.the.client.route.$as
+]
+```
+
+> The controller implementation
+
+```javascript
+app.controller(ROUTES.CLIENT.the.client.route.$as, [
+	'$scope', '$trocha', function($scope, $trocha) {
+		$scope.data = {
+			routes: $trocha.CLIENT
+		};
+		$trocha.xhr($trocha.SERVER.the.server.route, {path args...}, {data...})
+		.then(xhrSuccess, xhrFail);
+	}
+]);
+```
+```coffeescript
+app.controller ROUTES.CLIENT.the.client.route.$as, [
+	'$scope', '$trocha', ($scope, $trocha) ->
+		$scope.data =
+			routes: $trocha.CLIENT
+		$trocha.xhr $trocha.SERVER.the.server.route, {path args...}, {data...}
+		.then xhrSuccess, xhrFail
+]
+```
+
+[SEE EXAMPLE HERE](/examples/angular1)
+
+In this trivial example we use use the $http Angular service to make XHR request and ngRoute to handle routes and templates.
+
+Note various things:
+
+* We have diferent objects for client routes and server routes.
+* To print the routes in the view we integrate **just** the client routes in the scope view.
+* To naming the controller we use the `$as` attribute of the route.
+
+<aside class="notice">
+Notice we don't use ui-router because it use a custom url declaration.
+</aside>
+<aside class="notice">
+Notice Angular 1.6 by default use extra `#!` in fragment route mode. Not in the scope of this tutorial.
+</aside>
 
 # 305 - Node
 
