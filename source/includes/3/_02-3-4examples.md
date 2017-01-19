@@ -41,7 +41,7 @@ window.onload = ->
 ```
 
 If you want to use this library with [Vanilla JS](http://vanilla-js.com/)(my fav framework ;)) I recomend you to use [pathjs](http://mtrpcic.net/pathjs/) to route handle.
-[SEE  TRIVIAL EXAMPLE HERE](/examples/vanilla.html)
+[SEE  TRIVIAL EXAMPLE HERE](examples/vanilla.html)
 
 In this example we write the links `<a href >` via onload function
 
@@ -74,7 +74,7 @@ doJqueryXHR = (route, path, data) ->
 doJqueryXHR(serverRoutes.posts.show,{args},{data}).done succcesAction
 ```
 
-[SEE EXAMPLE HERE](/examples/jquery.html)
+[SEE EXAMPLE HERE](examples/jquery.html)
 
 In this example we use an ajax helper that include the route, the path parameters and the data it will send if any.
 
@@ -163,7 +163,7 @@ app.controller ROUTES.CLIENT.the.client.route.$as, [
 ]
 ```
 
-[SEE EXAMPLE HERE](/examples/angular1)
+[SEE EXAMPLE HERE](examples/angular1)
 
 In this trivial example we use use the $http Angular service to make XHR request and ngRoute to handle routes and templates.
 

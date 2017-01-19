@@ -21,7 +21,7 @@
 	};
 	const ROUTES = {
 		CLIENT: trocha({
-			pre: 'angular1/templates', // Note relative route
+			pre: 'templates', // Note relative route
 			post: '.html',
 			routes: {
 				posts: {
