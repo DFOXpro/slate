@@ -1563,6 +1563,101 @@ Note <code class="prettyprint">myRoutes</code> can&rsquo;t be <code class="prett
 
 <h1 id="304-angular-1-x">304 - Angular 1.X</h1>
 
+<blockquote>
+<p>The factory where we include trocha to our Angular project</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">app</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">'$trocha'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">'$http'</span><span class="p">,</span>
+    <span class="p">(</span><span class="nx">$http</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">$trocha</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">;</span>
+        <span class="nx">$trocha</span><span class="p">.</span><span class="nx">CLIENT</span> <span class="o">=</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="nx">CLIENT</span><span class="p">;</span>
+        <span class="nx">$trocha</span><span class="p">.</span><span class="nx">SERVER</span> <span class="o">=</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="nx">SERVER</span><span class="p">;</span>
+        <span class="nx">$trocha</span><span class="p">.</span><span class="nx">xhr</span> <span class="o">=</span> <span class="p">(</span><span class="nx">route</span><span class="p">,</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nx">args</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="na">url</span><span class="p">:</span> <span class="nx">route</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="nx">path</span><span class="p">),</span>
+                <span class="na">method</span><span class="p">:</span> <span class="nx">route</span><span class="p">.</span><span class="nx">$method</span>
+            <span class="p">}</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="nx">args</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+            <span class="k">return</span> <span class="nx">$http</span><span class="p">(</span><span class="nx">args</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">$trocha</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">]);</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">app</span><span class="p">.</span><span class="na">factory</span> <span class="s">'$trocha'</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s">'$http'</span><span class="p">,</span>
+    <span class="p">(</span><span class="nx">$http</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="nx">$trocha</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">;</span>
+        <span class="nx">$trocha</span><span class="p">.</span><span class="na">CLIENT</span> <span class="o">=</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="na">CLIENT</span>
+        <span class="nx">$trocha</span><span class="p">.</span><span class="na">SERVER</span> <span class="o">=</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="na">SERVER</span>
+        <span class="nx">$trocha</span><span class="p">.</span><span class="na">xhr</span> <span class="o">=</span> <span class="p">(</span><span class="nx">route</span><span class="p">,</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
+            <span class="nx">args</span> <span class="o">=</span>
+                <span class="na">url</span><span class="o">:</span> <span class="nx">route</span><span class="p">.</span><span class="na">path</span> <span class="nx">path</span>
+                <span class="na">method</span><span class="o">:</span> <span class="nx">route</span><span class="p">.</span><span class="na">$method</span>
+            <span class="nx">args</span><span class="p">.</span><span class="na">data</span> <span class="o">=</span> <span class="nx">data</span> <span class="k">if</span> <span class="nx">data</span>
+            <span class="nx">$http</span> <span class="nx">args</span>
+        <span class="nx">$trocha</span>
+<span class="p">]</span>
+</code></pre>
+<blockquote>
+<p>The ngRoute config</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">app</span><span class="p">.</span><span class="nx">config</span><span class="p">([</span>
+    <span class="s1">'$routeProvider'</span>
+    <span class="p">(</span><span class="nx">$routeProvider</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">$routeProvider</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="nx">ROUTES</span><span class="p">.</span><span class="nx">CLIENT</span><span class="p">.</span><span class="nx">the</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">path</span><span class="p">(),</span> <span class="p">{</span>
+            <span class="na">templateUrl</span><span class="p">:</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="nx">CLIENT</span><span class="p">.</span><span class="nx">the</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">path</span><span class="p">({</span><span class="na">ext</span><span class="p">:</span> <span class="kc">true</span><span class="p">}),</span>
+            <span class="na">controller</span><span class="p">:</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="nx">CLIENT</span><span class="p">.</span><span class="nx">the</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">$as</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">]);</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">app</span><span class="p">.</span><span class="na">config</span> <span class="p">[</span>
+    <span class="s">'$routeProvider'</span>
+    <span class="p">(</span><span class="nx">$routeProvider</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="nx">$routeProvider</span><span class="p">.</span><span class="na">when</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="na">CLIENT</span><span class="p">.</span><span class="na">the</span><span class="p">.</span><span class="na">client</span><span class="p">.</span><span class="na">route</span><span class="p">.</span><span class="na">path</span><span class="p">(),</span>
+            <span class="na">templateUrl</span><span class="o">:</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="na">CLIENT</span><span class="p">.</span><span class="na">the</span><span class="p">.</span><span class="na">client</span><span class="p">.</span><span class="na">route</span><span class="p">.</span><span class="na">path</span> <span class="p">{</span><span class="na">ext</span><span class="o">:</span> <span class="no">true</span><span class="p">}</span>
+            <span class="na">controller</span><span class="o">:</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="na">CLIENT</span><span class="p">.</span><span class="na">the</span><span class="p">.</span><span class="na">client</span><span class="p">.</span><span class="na">route</span><span class="p">.</span><span class="na">$as</span>
+<span class="p">]</span>
+</code></pre>
+<blockquote>
+<p>The controller implementation</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="nx">ROUTES</span><span class="p">.</span><span class="nx">CLIENT</span><span class="p">.</span><span class="nx">the</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">$as</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">'$scope'</span><span class="p">,</span> <span class="s1">'$trocha'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$trocha</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">$scope</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="na">routes</span><span class="p">:</span> <span class="nx">$trocha</span><span class="p">.</span><span class="nx">CLIENT</span>
+        <span class="p">};</span>
+        <span class="nx">$trocha</span><span class="p">.</span><span class="nx">xhr</span><span class="p">(</span><span class="nx">$trocha</span><span class="p">.</span><span class="nx">SERVER</span><span class="p">.</span><span class="nx">the</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">route</span><span class="p">,</span> <span class="p">{</span><span class="nx">path</span> <span class="nx">args</span><span class="p">...},</span> <span class="p">{</span><span class="nx">data</span><span class="p">...})</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">xhrSuccess</span><span class="p">,</span> <span class="nx">xhrFail</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">]);</span>
+</code></pre><pre class="highlight coffeescript"><code><span class="nx">app</span><span class="p">.</span><span class="na">controller</span> <span class="nx">ROUTES</span><span class="p">.</span><span class="na">CLIENT</span><span class="p">.</span><span class="na">the</span><span class="p">.</span><span class="na">client</span><span class="p">.</span><span class="na">route</span><span class="p">.</span><span class="na">$as</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s">'$scope'</span><span class="p">,</span> <span class="s">'$trocha'</span><span class="p">,</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$trocha</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="nx">$scope</span><span class="p">.</span><span class="na">data</span> <span class="o">=</span>
+            <span class="na">routes</span><span class="o">:</span> <span class="nx">$trocha</span><span class="p">.</span><span class="na">CLIENT</span>
+        <span class="nx">$trocha</span><span class="p">.</span><span class="na">xhr</span> <span class="nx">$trocha</span><span class="p">.</span><span class="na">SERVER</span><span class="p">.</span><span class="na">the</span><span class="p">.</span><span class="na">server</span><span class="p">.</span><span class="na">route</span><span class="p">,</span> <span class="p">{</span><span class="nx">path</span> <span class="nx">args</span><span class="p">...},</span> <span class="p">{</span><span class="nx">data</span><span class="p">...}</span>
+        <span class="p">.</span><span class="na">then</span> <span class="nx">xhrSuccess</span><span class="p">,</span> <span class="nx">xhrFail</span>
+<span class="p">]</span>
+</code></pre>
+<p><a href="/examples/angular1">SEE EXAMPLE HERE</a></p>
+
+<p>In this trivial example we use use the $http Angular service to make XHR request and ngRoute to handle routes and templates.</p>
+
+<p>Note various things:</p>
+
+<ul>
+<li>We have diferent objects for client routes and server routes.</li>
+<li>To print the routes in the view we integrate <strong>just</strong> the client routes in the scope view.</li>
+<li>To naming the controller we use the <code class="prettyprint">$as</code> attribute of the route.</li>
+</ul>
+
+<aside class="notice">
+Notice we don&rsquo;t use ui-router because it use a custom url declaration.
+</aside>
+
+<aside class="notice">
+Notice Angular 1.6 by default use extra `#!` in fragment route mode. Not in the scope of this tutorial.
+</aside>
+
 <h1 id="305-node">305 - Node</h1>
 
 <p>WIP :(</p>
