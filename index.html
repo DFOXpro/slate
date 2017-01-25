@@ -176,15 +176,20 @@ Ideal for client-side route management and NodeJS route declaration.</p>
 <h1 id="101-intro-to-trocha-js">101 - Intro to Trocha JS</h1>
 
 <blockquote>
-<p>Insert the library within your page</p>
+<p>Get a copy of the library via bower</p>
 </blockquote>
-<pre class="highlight html"><code><span class="nt">&lt;body&gt;</span>
-...Your page tags
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.rawgit.com/DFOXpro/trocha/0.1.2/dist/trocha.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-...Your other scripts
-<span class="nt">&lt;/body&gt;</span>
+<pre class="highlight plaintext"><code>bower install -S trocha#0.1.2
 </code></pre>
 <blockquote>
+<p>Insert the library within your page
+<code class="prettyprint">html
+&lt;body&gt;
+...Your page tags
+&lt;script src=&quot;https://cdn.rawgit.com/DFOXpro/trocha/0.1.2/dist/trocha.min.js&quot;&gt;&lt;/script&gt;
+...Your other scripts
+&lt;/body&gt;
+</code></p>
+
 <p>Now define routes</p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">myRoutes</span> <span class="o">=</span> <span class="nx">trocha</span><span class="p">({</span>
