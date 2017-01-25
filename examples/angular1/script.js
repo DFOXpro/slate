@@ -60,7 +60,7 @@
 	};
 	delete REST_RESOURCE;// no longer needed
 
-const emptyController = function($scope, $trocha) {
+	const emptyController = function($scope, $trocha) {
 		$scope.data = {
 			routes: $trocha.CLIENT
 		};

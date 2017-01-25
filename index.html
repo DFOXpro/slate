@@ -180,7 +180,7 @@ Ideal for client-side route management and NodeJS route declaration.</p>
 </blockquote>
 <pre class="highlight html"><code><span class="nt">&lt;body&gt;</span>
 ...Your page tags
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://rawgit.com/DFOXpro/trocha/0.1.1/dist/trocha.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.rawgit.com/DFOXpro/trocha/0.1.2/dist/trocha.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 ...Your other scripts
 <span class="nt">&lt;/body&gt;</span>
 </code></pre>
@@ -255,7 +255,7 @@ Ideal for client-side route management and NodeJS route declaration.</p>
 <blockquote>
 <p>This should generate:</p>
 </blockquote>
-<pre class="highlight shell"><code>/ <span class="c"># Not in 0.1.1 tag</span>
+<pre class="highlight shell"><code>/ <span class="c"># Not in 0.1.2 tag</span>
 /contact
 /hello/:name
 /crud <span class="c">#get = list</span>
@@ -332,7 +332,7 @@ Note <code class="prettyprint">myRoutes</code> can&rsquo;t be <code class="prett
 <blockquote>
 <p>This should generate:</p>
 </blockquote>
-<pre class="highlight shell"><code>/ <span class="c"># Not in 0.1.1 tag</span>
+<pre class="highlight shell"><code>/ <span class="c"># Not in 0.1.2 tag</span>
 /contact
 /hello/World
 /crud <span class="c">#get = list</span>
@@ -344,7 +344,7 @@ Note <code class="prettyprint">myRoutes</code> can&rsquo;t be <code class="prett
 <p>To print any of your routes simply use <code class="prettyprint">path()</code> function at the end of the route.
 See <a href="#204-route-printing-parameters">Route printing parameters</a>
 <aside class="warning">
-Note for <code class="prettyprint">0.1.1</code> tag, alias print without the path function, this will change in future releases
+Note for <code class="prettyprint">0.1.2</code> tag, alias print without the path function, this will change in future releases
 </aside></p>
 
           <h1 id="200-api">200 - API</h1>
@@ -605,7 +605,7 @@ https://myRESTfulAPI.net.co/products/:product_id.json <span class="c"># delete</
 </code></pre>
 <p>This type of route can render an specific string independent of the name, it&rsquo;s usefull to print cdns and very long and isolated paths
 <aside class="warning">
-Note for <code class="prettyprint">0.1.1</code> tag, alias print without the path function, this will change in future releases
+Note for <code class="prettyprint">0.1.2</code> tag, alias print without the path function, this will change in future releases
 </aside></p>
 
           <h1 id="202-constants">202 - Constants</h1>
@@ -1363,7 +1363,7 @@ Note <code class="prettyprint">myRoutes</code> can&rsquo;t be <code class="prett
 <blockquote>
 <p>GOOD idea</p>
 </blockquote>
-<pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.rawgit.com/DFOXpro/trocha/0.1.1/dist/trocha.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.rawgit.com/DFOXpro/trocha/0.1.2/dist/trocha.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre>
 <p>Wherever you use this library never point to master branch, use always an especific version of the library.</p>
 
@@ -1672,61 +1672,10 @@ Notice Angular 1.6 by default use extra `#!` in fragment route mode. Not in the 
 
 <h2 id="404-known-bugs">404 - Known bugs</h2>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
-</tr>
-</tbody></table>
+<ul>
+<li>An empty route like <code class="prettyprint">/</code> will return blank &ldquo;</li>
+<li>Alias ignore parent and does not support child routes</li>
+</ul>
 
 <h2 id="418-htcpcp">418 - HTCPCP</h2>
 
