@@ -1,8 +1,13 @@
 # 100 - Basics
 # 101 - Intro to Trocha JS
 
-> Insert the library within your page
+> Get a copy of the library via bower
 
+```
+bower install -S trocha#0.1.2
+```
+
+> Insert the library within your page
 ```html
 <body>
 ...Your page tags
