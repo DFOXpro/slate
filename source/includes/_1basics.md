@@ -6,7 +6,7 @@
 ```html
 <body>
 ...Your page tags
-<script src="https://rawgit.com/DFOXpro/trocha/0.1.1/dist/trocha.min.js"></script>
+<script src="https://cdn.rawgit.com/DFOXpro/trocha/0.1.2/dist/trocha.min.js"></script>
 ...Your other scripts
 </body>
 ```
@@ -99,7 +99,7 @@ myRoutes = trocha {
 > This should generate:
 
 ```bash
-/ # Not in 0.1.1 tag
+/ # Not in 0.1.2 tag
 /contact
 /hello/:name
 /crud #get = list
@@ -188,7 +188,7 @@ myRoutes.faq #This will change for path()
 > This should generate:
 
 ```bash
-/ # Not in 0.1.1 tag
+/ # Not in 0.1.2 tag
 /contact
 /hello/World
 /crud #get = list
@@ -201,5 +201,5 @@ myRoutes.faq #This will change for path()
 To print any of your routes simply use `path()` function at the end of the route.
 See [Route printing parameters](#204-route-printing-parameters)
 <aside class="warning">
-Note for `0.1.1` tag, alias print without the path function, this will change in future releases
+Note for `0.1.2` tag, alias print without the path function, this will change in future releases
 </aside>

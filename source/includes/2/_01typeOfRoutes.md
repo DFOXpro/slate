@@ -278,5 +278,5 @@ https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js
 
 This type of route can render an specific string independent of the name, it's usefull to print cdns and very long and isolated paths
 <aside class="warning">
-Note for `0.1.1` tag, alias print without the path function, this will change in future releases
+Note for `0.1.2` tag, alias print without the path function, this will change in future releases
 </aside>
