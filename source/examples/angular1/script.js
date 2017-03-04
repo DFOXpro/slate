@@ -104,6 +104,30 @@
 			return $trocha;
 		}
 	]);
+	// This is part of the core of this example
+	app.directive( 'thref', () => {// Trocha href
+		return {
+			restrict: 'A',
+			link: ($scope, elements, attrs) => {
+				// console.log('thref', $scope, elements, attrs);
+				route = ROUTES.CLIENT;
+				attrs.thref.split('.').forEach((r) => {
+					route = route[r];
+					// console.log(route, r);
+					if(!route) throw "Invalid thref route"
+				});
+				if(attrs.tpath)
+					try {
+						attrs.tpath = JSON.parse(attrs.tpath)
+					} catch(error){
+						console.error('Invalid tpath JSON', error)
+					}
+				if("string" == typeof route)
+					elements[0].href = route; // @TODO in future release this will be obsolete
+				else elements[0].href = '#!' + route.path(attrs.tpath)//default hashprefix since 1.6
+			}
+		}
+	});
 
 	app.config([
 		'$routeProvider',
