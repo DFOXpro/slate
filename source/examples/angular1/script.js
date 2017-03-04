@@ -24,6 +24,8 @@
 			pre: 'templates', // Note relative route
 			post: '.html',
 			routes: {
+				trochaJSDocs: 'https://dfoxpro.github.io/trochaJS',
+				trochaJSAngularSRC: 'https://github.com/DFOXpro/trochaJS/tree/master/source/examples/angular1',
 				posts: {
 					$type: trocha.RESOURCE,
 					$id: 'postId',
@@ -61,9 +63,7 @@
 	delete REST_RESOURCE;// no longer needed
 
 	const emptyController = function($scope, $trocha) {
-		$scope.data = {
-			routes: $trocha.CLIENT
-		};
+		// Do nothing
 	};
 	const listController = (type) => {
 		return function($scope, $trocha) {//this is the controller
@@ -71,8 +71,6 @@
 				type: type
 			};
 
-			// this part should be in a resolve, but I put here to make the example smaller
-			$scope.data.routes = $trocha.CLIENT;
 			// I hope you dont get lost with this mix of names
 			const xhrSuccess = (response) => $scope.data.response = response.data;
 			$trocha.xhr($trocha.SERVER[type].list).then(xhrSuccess, xhrFail);
