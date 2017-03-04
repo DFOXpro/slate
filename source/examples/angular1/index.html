@@ -8,13 +8,14 @@
 		<nav>
 			<h1>Angular 1.X + TrochaJS example</h1>
 			<p>
-				To see previous example (JQuery AJAX) <a href="../jquery.html">click here</a><br>
 				To see the documentation <a thref="trochaJSDocs">click here</a><br><!-- Note using the directive is posible to define this link -->
+				To see previous example (JQuery AJAX) <a href="../jquery.html">click here</a><br><!-- Note this link is outside the scope of this example -->
 				To see the source files of this example <a thref="trochaJSAngularSRC">click here</a>
 			</p>
 		</nav>
 		<div ng-controller="index" ng-view></div>
 
+		<!-- Note I'm not using Trocha for bootstrap routes like those scripts below this line -->
 		<script src="https://cdn.rawgit.com/DFOXpro/trocha/0.1.2/dist/trocha.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-route.js"></script>

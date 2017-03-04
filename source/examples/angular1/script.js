@@ -1,6 +1,6 @@
 (() => {
 	let REST_RESOURCE = trocha.$RESOURCE;
-	// now we are adding more routes to the default resource
+	// Now we are adding more routes to the default resource
 	// Note this will only be used within the server routes
 	REST_RESOURCE.list = {
 		$id: false,
@@ -35,7 +35,7 @@
 					$type: trocha.RESOURCE,
 					$id: 'userId'
 				},
-				data: { //just for templates
+				data: { // Just for templates
 					$type: trocha.RESOURCE,
 					$id: 'dummyId'
 				},
@@ -60,13 +60,21 @@
 			}
 		})
 	};
-	delete REST_RESOURCE;// no longer needed
+	delete REST_RESOURCE;// No longer needed
 
+	// This function must be somewhere else but I keep here for simplicity
+	const xhrFail = (response) => {
+		console.error('xhrFail', response);
+		window.alert('The XHR fail, see console output')
+	};
+
+	// Generic angularjs controllers
 	const emptyController = function($scope, $trocha) {
 		// Do nothing
 	};
-	const listController = (type) => {
-		return function($scope, $trocha) {//this is the controller
+
+	const listControllerGenerator = (type) => {
+		return function($scope, $trocha) {// This is the controller
 			$scope.data = {
 				type: type
 			};
@@ -76,15 +84,11 @@
 			$trocha.xhr($trocha.SERVER[type].list).then(xhrSuccess, xhrFail);
 		}
 	};
-	const xhrFail = (response) => {
-		console.error('xhrFail', response);
-		window.alert('The XHR fail, see console output')
-	};
 
 	// Note TrochaJS is not a module of angularjs... yet
 	let app = angular.module("app", ['ngRoute']);
 
-	// This is the core of this example
+	// This is part of the core of this example
 	app.factory('$trocha', [
 		'$http',
 		($http) => {
@@ -149,11 +153,11 @@
 	]);
 
 	app.controller(ROUTES.CLIENT.users.list.$as, [
-		'$scope', '$trocha', listController(ROUTES.CLIENT.users.$as)
+		'$scope', '$trocha', listControllerGenerator(ROUTES.CLIENT.users.$as)
 	]);
 	
 	app.controller(ROUTES.CLIENT.posts.list.$as, [
-		'$scope', '$trocha', listController(ROUTES.CLIENT.posts.$as)
+		'$scope', '$trocha', listControllerGenerator(ROUTES.CLIENT.posts.$as)
 	]);
 
 })();
