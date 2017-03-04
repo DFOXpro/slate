@@ -79,7 +79,55 @@ doJqueryXHR(serverRoutes.posts.show,{args},{data}).done succcesAction
 In this example we use an ajax helper that include the route, the path parameters and the data it will send if any.
 
 # 304 - Angular 1.X
-> The factory where we include trocha to our Angular project
+> The directive where we include trocha to our Angular project views via `<a thref="ROUTE">...`
+
+```javascript
+app.directive( 'thref', () => {// Trocha href
+	return {
+		restrict: 'A',
+		link: ($scope, elements, attrs) => {
+			route = ROUTES.CLIENT;
+			attrs.thref.split('.').forEach((r) => {
+				route = route[r];
+				if(!route) throw "Invalid thref route"
+			});
+			if(attrs.tpath)
+				try {
+					attrs.tpath = JSON.parse(attrs.tpath)
+				} catch(error){
+					console.error('Invalid tpath JSON', error)
+				}
+			if("string" == typeof route)
+				elements[0].href = route; // @TODO in future release this will be obsolete
+			else elements[0].href = '#!' + route.path(attrs.tpath)// default hashprefix since 1.6
+		}
+	}
+});
+```
+```coffeescript
+app.directive 'thref', () ->
+	restrict: 'A'
+	link: ($s, elements, attrs) ->
+		route = _routes.client
+		attrs.thref.split('.').forEach (r) ->
+			route = route[r]
+			if !route
+				throw "Invalid thref route"
+		if attrs.tpath
+			try
+				attrs.tpath = JSON.parse attrs.tpath
+			catch error
+				console.error 'Invalid tpath JSON', error
+		if "string" == typeof route
+			elements[0].href = route # @TODO in future release this will be obsolete
+		else
+			elements[0].href = '#!' + route.path attrs.tpath # default hashprefix since 1.6
+```
+```html
+<a thref="trochaJSDocs">click here</a>
+<a thref="users.list">Show users list</a>
+```
+> The factory where we include trocha XHR helper to our Angular project
 
 ```javascript
 app.factory('$trocha', [
@@ -170,14 +218,11 @@ In this trivial example we use use the $http Angular service to make XHR request
 Note various things:
 
 * We have diferent objects for client routes and server routes.
-* To print the routes in the view we integrate **just** the client routes in the scope view.
+* To print the routes in the view we integrate **just** the client routes in the directive.
 * To naming the controller we use the `$as` attribute of the route.
 
 <aside class="notice">
 Notice we don't use ui-router because it use a custom url declaration.
-</aside>
-<aside class="notice">
-Notice Angular 1.6 by default use extra `#!` in fragment route mode. Not in the scope of this tutorial.
 </aside>
 
 # 305 - Node
