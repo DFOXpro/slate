@@ -1,6 +1,6 @@
 (() => {
 	let REST_RESOURCE = trocha.$RESOURCE;
-	// now we are adding more routes to the default resource
+	// Now we are adding more routes to the default resource
 	// Note this will only be used within the server routes
 	REST_RESOURCE.list = {
 		$id: false,
@@ -24,6 +24,8 @@
 			pre: 'templates', // Note relative route
 			post: '.html',
 			routes: {
+				trochaJSDocs: 'https://dfoxpro.github.io/trochaJS',
+				trochaJSAngularSRC: 'https://github.com/DFOXpro/trochaJS/tree/master/source/examples/angular1',
 				posts: {
 					$type: trocha.RESOURCE,
 					$id: 'postId',
@@ -33,7 +35,7 @@
 					$type: trocha.RESOURCE,
 					$id: 'userId'
 				},
-				data: { //just for templates
+				data: { // Just for templates
 					$type: trocha.RESOURCE,
 					$id: 'dummyId'
 				},
@@ -58,35 +60,35 @@
 			}
 		})
 	};
-	delete REST_RESOURCE;// no longer needed
+	delete REST_RESOURCE;// No longer needed
 
-	const emptyController = function($scope, $trocha) {
-		$scope.data = {
-			routes: $trocha.CLIENT
-		};
-	};
-	const listController = (type) => {
-		return function($scope, $trocha) {//this is the controller
-			$scope.data = {
-				type: type
-			};
-
-			// this part should be in a resolve, but I put here to make the example smaller
-			$scope.data.routes = $trocha.CLIENT;
-			// I hope you dont get lost with this mix of names
-			const xhrSuccess = (response) => $scope.data.response = response.data;
-			$trocha.xhr($trocha.SERVER[type].list).then(xhrSuccess, xhrFail);
-		}
-	};
+	// This function must be somewhere else but I keep here for simplicity
 	const xhrFail = (response) => {
 		console.error('xhrFail', response);
 		window.alert('The XHR fail, see console output')
 	};
 
+	// Generic angularjs controllers
+	const emptyController = function($scope, $trocha) {
+		// Do nothing
+	};
+
+	const listControllerGenerator = (type) => {
+		return function($scope, $trocha) {// This is the controller
+			$scope.data = {
+				type: type
+			};
+
+			// I hope you dont get lost with this mix of names
+			const xhrSuccess = (response) => $scope.data.response = response.data;
+			$trocha.xhr($trocha.SERVER[type].list).then(xhrSuccess, xhrFail);
+		}
+	};
+
 	// Note TrochaJS is not a module of angularjs... yet
 	let app = angular.module("app", ['ngRoute']);
 
-	// This is the core of this example
+	// This is part of the core of this example
 	app.factory('$trocha', [
 		'$http',
 		($http) => {
@@ -104,6 +106,30 @@
 			return $trocha;
 		}
 	]);
+	// This is part of the core of this example
+	app.directive( 'thref', () => {// Trocha href
+		return {
+			restrict: 'A',
+			link: ($scope, elements, attrs) => {
+				// console.log('thref', $scope, elements, attrs);
+				route = ROUTES.CLIENT;
+				attrs.thref.split('.').forEach((r) => {
+					route = route[r];
+					// console.log(route, r);
+					if(!route) throw "Invalid thref route"
+				});
+				if(attrs.tpath)
+					try {
+						attrs.tpath = JSON.parse(attrs.tpath)
+					} catch(error){
+						console.error('Invalid tpath JSON', error)
+					}
+				if("string" == typeof route)
+					elements[0].href = route; // @TODO in future release this will be obsolete
+				else elements[0].href = '#!' + route.path(attrs.tpath)//default hashprefix since 1.6
+			}
+		}
+	});
 
 	app.config([
 		'$routeProvider',
@@ -127,11 +153,11 @@
 	]);
 
 	app.controller(ROUTES.CLIENT.users.list.$as, [
-		'$scope', '$trocha', listController(ROUTES.CLIENT.users.$as)
+		'$scope', '$trocha', listControllerGenerator(ROUTES.CLIENT.users.$as)
 	]);
 	
 	app.controller(ROUTES.CLIENT.posts.list.$as, [
-		'$scope', '$trocha', listController(ROUTES.CLIENT.posts.$as)
+		'$scope', '$trocha', listControllerGenerator(ROUTES.CLIENT.posts.$as)
 	]);
 
 })();
