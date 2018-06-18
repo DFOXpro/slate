@@ -77,8 +77,9 @@ const myRoutes = trocha({
 });
 ```
 ```coffeescript
-# For coffeescript lets hope this feature and all es6 grammar became avalible :(
-# See: https://github.com/jashkenas/coffeescript/issues/3571
+const myRoutes = trocha {... my routes ...} # for CS2
+
+# for coffeescript vanilla :(
 __myRoutes = {... my routes ...}
 `const myRoutes = trocha({
 	routes: __myRoutes
@@ -150,3 +151,43 @@ serverBRoutes = trocha {
 ```
 
 If your project access to RESTful apis declare a trocha object per server, also use an exclusive object for client views
+
+
+**WHY?**
+
+* Its more clean for the apis or cdns or views route trees
+* Most cases views routes are diferent of api routes
+* Even more you can create some security holes showing all your api routes in the view
+
+## ñ04 If posible use Trocha for(with) async cdns
+> BAD idea
+
+```javascript
+loadAsyncCDN('www.myCDN.io/min.js');
+```
+```coffeescript
+loadAsyncCDN 'www.myCDN.io/min.js'
+```
+
+> GOOD idea
+
+```javascript
+myCDN = trocha({routes: min: 'www.myCDN.io/min.js'});
+loadAsyncCDN(myCDN.min);
+```
+```coffeescript
+myCDN = trocha routes: min: 'www.myCDN.io/min.js'
+loadAsyncCDN myCDN.min
+```
+
+If you use async libraries or technologies like AMD use trocha to point the cdn url
+
+
+**WHY?**
+
+* Its cleaner
+* Can be used like Dependency Injection if you wanna, ideal for dev/test/production environment swap
+
+<aside class="success">
+BTW Trocha can be loaded any time in runtime :) so feel free to load whenever you want
+</aside>
