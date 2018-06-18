@@ -38,7 +38,7 @@ const ROUTES = trocha({
 });
 ```
 ```coffeescript
-ROUTES = trocha {
+ROUTES = trocha
 	routes:
 		route_a:
 			$type: trocha.ROUTE # Not necesary
@@ -48,7 +48,6 @@ ROUTES = trocha {
 		resource:
 			$type: trocha.RESOURCE
 		alias: "theAlias"
-}
 ```
 
 There are 4 type of routes implemented in trocha but only 2 route type names need to be use:
@@ -75,7 +74,7 @@ const ROUTES = {
 		routes:{
 			users: {
 				login: {
-					$method: trocha.GET
+					$method: trocha.PATCH
 				}
 			}
 		}
@@ -84,14 +83,13 @@ const ROUTES = {
 ```
 
 ```coffeescript
-ROUTES.SERVER = trocha {
+ROUTES.SERVER = trocha
 	domain: 'https://myRESTfulAPI.net.co'
 	alwaysUrl: true
 	routes:
 		users:
 			login:
-				$method: trocha.GET
-}
+				$method: trocha.PATCH
 ```
 
 > This should generate:
@@ -99,7 +97,7 @@ ROUTES.SERVER = trocha {
 ```bash
 users.login:
 	url: https://myRESTfulAPI.net.co/users/login
-	method: GET
+	method: PATCH
 ```
 
 > You can use this in Angular 1.X xhr calls, for example:
@@ -123,15 +121,14 @@ $http({
 
 ```coffeescript
 # some Angular 1.X code
-data.user = {
+data.user =
 	username: $scope.data.user.toLowerCase()
 	password: $scope.data.password
-}
-$http({
+$http
 	url: ROUTES.SERVER.users.login.path()
 	method: ROUTES.SERVER.users.login.$method
 	data: data
-} ).then (response) ->
+.then (response) ->
 	# Your amazing login success code
 , (response) ->
 	# Your amazing login fail code

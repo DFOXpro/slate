@@ -33,24 +33,19 @@ myRoutes.person._newRoute( {
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	routes:
 		person:
 			$id: "name"
 			$hide: true
-			index: {}
-}
+			attributes: {}
 #OR
 myRoutes = trocha()
-myRoutes._newRoute {
+myRoutes._newRoute
 	name: "person"
 	hide: true
 	id: "name"
-}
-
-myRoutes.person._newRoute {
-	name: "index"
-}
+myRoutes.person._newRoute name: "attributes"
 ```
 
 > This should generate:
@@ -86,26 +81,24 @@ myRoutes._newResource( {
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	routes:
 		products:
 			$type: trocha.RESOURCE
 			$id: "product_id"
-}
 #OR
 myRoutes = trocha()
-myRoutes._newResource {
+myRoutes._newResource
 	name: "products",
 	id: "product_id"
-}
 ```
 
 > This should generate:
 
 ```bash
-/products
+/products # list of
 /products/new
-/products/:product_id
+/products/:product_id # show of
 /products/:product_id/edit
 ```
 
@@ -146,16 +139,16 @@ serverRoutes = trocha( {
 ```
 
 ```coffeescript
-apiResource = trocha.$RESOURCE # Note the $, this is an object not the String
+apiResource = trocha.$RESOURCE # Note the $, this is an object not a String
 delete apiResource.new
 delete apiResource.edit
-#apiResource.show = {$hide: true} # Already defined
-apiResource.list = {$id: false, $hide: true} # Override $hide: true
+# apiResource.show = {$hide: true} # Already defined
+apiResource.list = {$id: false} # Override $hide: true
 apiResource.create = {$hide: true, $id: false, $method: trocha.POST}
 apiResource.update = {$hide: true, $method: trocha.PATCH}
 apiResource.delete = {$hide: true, $method: trocha.DELETE}
 
-serverRoutes = trocha {
+serverRoutes = trocha
 	domain: 'https://myRESTfulAPI.net.co'
 	post: '.json'
 	alwaysPost: true
@@ -163,7 +156,7 @@ serverRoutes = trocha {
 	resource: apiResource
 	routes:
 		products:
-			$type: trocha.RESOURCE # Note this is String
+			$type: trocha.RESOURCE # Note this is String (whitout the $ prefix)
 			$id: 'product_id'
 ```
 
@@ -200,29 +193,20 @@ const myRoutes = trocha( {
 });
 //OR
 let myRoutes = trocha();
-myRoutes._newScope( {
-	name: "portal"
-});
-myRoutes.portal._newRoute( {
-	name: "dashboard"
-});
+myRoutes._newScope({name: "portal"});
+myRoutes.portal._newRoute({name: "dashboard"});
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	routes:
 		portal:
 			$type: trocha.SCOPE
 			dashboard: {}
-}
 #OR
 myRoutes = trocha()
-myRoutes._newScope {
-	name: "portal"
-}
-myRoutes.portal._newRoute {
-	name: "dashboard"
-}
+myRoutes._newScope name: "portal"
+myRoutes.portal._newRoute name: "dashboard"
 ```
 
 > This should generate:
@@ -256,17 +240,15 @@ console.log(cdns.pathjs);
 ```
 
 ```coffeescript
-cdns = trocha {
+cdns = trocha
 	routes:
 		# This is a cool vanilla views/routing system more @ http://mtrpcic.net/pathjs/
 		pathjs: "https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js"
-}
 #OR
 cdns = trocha()
-cdns._newAlias {
+cdns._newAlias
 	name: "pathjs"
 	alias: "https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js"
-}
 console.log cdns.pathjs
 ```
 
@@ -278,5 +260,5 @@ https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js
 
 This type of route can render an specific string independent of the name, it's usefull to print cdns and very long and isolated paths
 <aside class="warning">
-Note for `0.1.2` tag, alias print without the path function, this will change in future releases
+Note for `0.1.3` tag, alias print without the path function, this will change in future releases
 </aside>

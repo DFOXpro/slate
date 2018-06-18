@@ -10,7 +10,7 @@
 > GOOD idea
 
 ```html
-<script src="https://cdn.rawgit.com/DFOXpro/trocha/0.1.2/dist/trocha.min.js"></script>
+<script src="https://cdn.rawgit.com/DFOXpro/trocha/0.1.3/dist/trocha.min.js"></script>
 ```
 
 Wherever you use this library never point to master branch, use always an especific version of the library.

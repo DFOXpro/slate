@@ -11,11 +11,10 @@ console.log(serverRoutes.home.path());
 ```
 
 ```coffeescript
-serverRoutes = trocha {
+serverRoutes = trocha
 	domain: 'https://mydomain.net.co'
 	alwaysUrl: true
-	routes:
-		home: {}
+	routes: home: {}
 console.log serverRoutes.home.path()
 ```
 > This should print:

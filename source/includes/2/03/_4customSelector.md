@@ -18,14 +18,13 @@ console.log(myRoutes.hello.$id.path());
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	customSelector: 'TRCH'
 	routes:
 		hello:
 			TRCHid: 'name'
 			TRCHmethod: trocha.GET
 			$id: {}
-}
 console.log myRoutes.hello.path {name: 'World'}
 console.log myRoutes.hello.TRCHid
 console.log myRoutes.hello.$id

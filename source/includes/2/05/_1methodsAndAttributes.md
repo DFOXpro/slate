@@ -13,8 +13,7 @@ myRoutes = trocha( {
 		country: {
 			state: {
 				city: {
-					town: {}}}
-		}
+					town: {}}}}
 	}
 });
 console.log(myRoutes.country.$name);
@@ -23,13 +22,12 @@ console.log(myRoutes.country.state.city.town.$name);
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	routes:
 		country:
 			state:
 				city:
 					town: {}
-}
 console.log myRoutes.country.$name
 console.log myRoutes.country.state.$name
 console.log myRoutes.country.state.city.town.$name
@@ -50,8 +48,7 @@ myRoutes = trocha( {
 		country: {
 			state: {
 				city: {
-					town: {}}}
-		}
+					town: {}}}}
 	}
 });
 console.log(myRoutes.country.$as);
@@ -60,13 +57,12 @@ console.log(myRoutes.country.state.city.town.$as);
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	routes:
 		country:
 			state:
 				city:
 					town: {}
-}
 console.log myRoutes.country.$as
 console.log myRoutes.country.state.$as
 console.log myRoutes.country.state.city.town.$as
@@ -91,10 +87,7 @@ serverRoutes = trocha( {
 	routes: {
 		students: {
 			$method: trocha.GET,
-			create: {
-				$method: trocha.POST
-			}
-		}
+			create: { $method: trocha.POST}}
 	}
 });
 console.log(serverRoutes.students.$method);
@@ -102,13 +95,11 @@ console.log(serverRoutes.students.create.$method);
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	routes:
 		students:
 			$method: trocha.GET
-			create:
-				$method: trocha.POST
-}
+			create: $method: trocha.POST
 console.log myRoutes.students.$method
 console.log myRoutes.students.create.$method
 ```

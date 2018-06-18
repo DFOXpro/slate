@@ -5,15 +5,8 @@ When you're creating your trocha object you can set some basic parameters so whe
 ```javascript
 myRoutes = trocha( {
 	routes: {
-		home: {},
-		people: {
-			$id: "name",
-			update: {
-				$hide: true,
-				$method: trocha.PATCH
-			}
-		},
-		The: {
+		home: {}, // A simple route
+		The: { // It's supports many levels of hierarchy
 			quick: {
 				brown: {
 					fox: {
@@ -21,27 +14,28 @@ myRoutes = trocha( {
 							over: {
 								the: {
 									lazy: {
-										dog: {}}}}}}}}}
-// that's why I prefer coffeescript ;)
+										dog: {}}}}}}}}}, // that's why I prefer coffeescript ;)
+		people: {
+			$id: "name",
+			update: {
+				$hide: true, // The "update" will be hidden
+				$method: trocha.PATCH // This can be part of a (custom) resource ;)
+			}
+		},
 	}
 });
 console.log(myRoutes.home.path());
-console.log(myRoutes.people.update.path());
-console.log(myRoutes.people.update.$method);
 console.log(myRoutes.The.quick.brown.path());
 console.log(myRoutes.The.quick.brown.fox.jumps.over.the.lazy.dog.path());
+console.log(myRoutes.people.update.path());
+console.log(myRoutes.people.update.$method);
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	routes:
-		home: {}
-		people:
-			$id: "name"
-			update:
-				$hide: true
-				$method: trocha.PATCH
-		The:
+		home: {} # A simple route
+		The: # It's supports many levels of hierarchy
 			quick:
 				brown:
 					fox:
@@ -49,13 +43,18 @@ myRoutes = trocha {
 							over:
 								the:
 									lazy:
-										dog: {}
-# that's why I prefer coffeescript ;)
+										dog: {} # that's why I prefer coffeescript ;)
+		people:
+			$id: "name"
+			update:
+				$hide: true # The "update" will be hidden
+				$method: trocha.PATCH # This can be part of a (custom) resource ;)
+
 console.log myRoutes.home.path()
-console.log myRoutes.people.update.path()
-console.log myRoutes.people.update.$method
 console.log myRoutes.The.quick.brown.path()
 console.log myRoutes.The.quick.brown.fox.jumps.over.the.lazy.dog.path()
+console.log myRoutes.people.update.path()
+console.log myRoutes.people.update.$method
 ```
 > This should print:
 
@@ -87,4 +86,4 @@ $hide      | Optional  | NA        | NA        | NA        | Bool   | Hide the a
 $method    | Optional  | NA        | NA        | NA        | String | Define wich method will be used when requested this path
 $alias (*) | NA        | NA        | NA        | Mandatory | String | An String that replace the name
 
-(*) Also note `name` and `alias` are only used when the route is defined vía method
+(\*) Also note `name` and `alias` are only used when the route is defined vía method

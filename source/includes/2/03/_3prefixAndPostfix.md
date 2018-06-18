@@ -11,20 +11,19 @@ templateRoutes = trocha( {
 console.log(templateRoutes.home.path());
 console.log(templateRoutes.home.path({post: false}));
 console.log(templateRoutes.home.path({pre: true}));
-console.log(templateRoutes.home.path({ext: true})); //only if alwaysPost is not set
+console.log(templateRoutes.home.path({ext: true})); // only if alwaysPost is not set
 ```
 
 ```coffeescript
-templateRoutes = trocha {
+templateRoutes = trocha
 	pre: '/templates' # note the /
 	post: '-myH45H.html'
 	alwaysPost: true
-	routes:
-		home: {}
+	routes: home: {}
 console.log templateRoutes.home.path()
-console.log templateRoutes.home.path {post: false}
-console.log templateRoutes.home.path {pre: true}
-console.log templateRoutes.home.path {ext: true} #only if alwaysPost is not set
+console.log templateRoutes.home.path post: false
+console.log templateRoutes.home.path pre: true
+console.log templateRoutes.home.path ext: true # only if alwaysPost is not set
 ```
 > This should print:
 

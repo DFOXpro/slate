@@ -31,7 +31,7 @@ console.log(myRoutes.town.house.path({
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	pre: '/templates' # note the /
 	post: '-myH45H.html'
 	domain: 'https://mydomain.net.co'
@@ -41,19 +41,22 @@ myRoutes = trocha {
 			house:
 				$id: 'address'
 console.log myRoutes.town.path()
-console.log myRoutes.town.path {url: true} # only if alwaysUrl is not set
-console.log myRoutes.town.path {pre: true}
-console.log myRoutes.town.path {post: true} # only if alwaysPost is not set
-console.log myRoutes.town.path {ext: true}
-console.log myRoutes.town.path {hide: true}
-console.log myRoutes.town.path {query: {description: true, pictures: 4}}
-console.log myRoutes.town.path {fragment: 'references'}
-console.log myRoutes.town.house.path {parentId: false}
-console.log myRoutes.town.house.path {id: false}
-console.log myRoutes.town.house.path {
+console.log myRoutes.town.path url: true # only if alwaysUrl is not set
+console.log myRoutes.town.path pre: true
+console.log myRoutes.town.path post: true # only if alwaysPost is not set
+console.log myRoutes.town.path ext: true
+console.log myRoutes.town.path hide: true
+console.log myRoutes.town.path
+	query:
+		description: true
+		pictures: 4
+console.log myRoutes.town.path fragment: 'references'
+console.log myRoutes.town.house.path parentId: false
+console.log myRoutes.town.house.path id: false
+console.log myRoutes.town.house.path
 	town_name: 'Sydney_NSW'
 	address: 'P._Sherman_42_wallaby_way'
-}
+
 ```
 > This should print:
 
@@ -81,7 +84,7 @@ Parameters:
 * `hide: true` Hide the last name of the path, if an id is setted it will appears anyway.
 * `parentId: false` Hide the parent route id.
 * `id: false` Hide the route id.
-* `<someId>: String` set the value of some id of the rpute.
+* `<someId>: String` set the value of some id of the route.
 * `query: {<attribute>:<value>}` Print a define query `?<attribute>=<value>&...`.
 * `fragment: String` Print the fragment `#<value>`.
 

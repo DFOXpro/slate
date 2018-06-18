@@ -27,10 +27,9 @@ theRoute = myRoutes.product.buy.path( {
 ```
 
 ```coffeescript
-theRoute = myRoutes.product.buy.path {
+theRoute = myRoutes.product.buy.path
 	product_id: myProduct.id
-	query: {quantity: sell.quantity}
-}
+	query: quantity: sell.quantity
 ```
 
 

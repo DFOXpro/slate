@@ -4,14 +4,14 @@
 > Get a copy of the library via bower
 
 ```
-bower install -S trocha#0.1.2
+bower install -S trocha#0.1.3
 ```
 
 > Insert the library within your page
 ```html
 <body>
 ...Your page tags
-<script src="https://cdn.rawgit.com/DFOXpro/trocha/0.1.2/dist/trocha.min.js"></script>
+<script src="https://cdn.rawgit.com/DFOXpro/trocha/0.1.3/dist/trocha.min.js"></script>
 ...Your other scripts
 </body>
 ```
@@ -29,11 +29,10 @@ var myRoutes = trocha({
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	routes:
 		hello:
 			$id: "name"
-}
 ```
 
 > finally print the routes
@@ -46,7 +45,7 @@ console.log(myroutes.hello.path({name: "World"}));
 
 ```coffeescript
 console.log myroutes.hello.path()
-console.log myroutes.hello.path {name: "World"}
+console.log myroutes.hello.path name: "World"
 ```
 
 > This will print:
@@ -87,7 +86,7 @@ const myRoutes = trocha( {
 ```
 
 ```coffeescript
-myRoutes = trocha {
+myRoutes = trocha
 	routes:
 		index:
 			$hide: true
@@ -98,19 +97,18 @@ myRoutes = trocha {
 			$type: trocha.RESOURCE
 			$id: "crud_id"
 		faq: "FrequentlyAskedQuestions"
-}
 ```
 
 > This should generate:
 
 ```bash
-/ # Not in 0.1.2 tag
+ # an empty string return index
 /contact
 /hello/:name
-/crud #get = list
-/crud/new #get = view for create
-/crud/:crud_id #get = show
-/crud/:crud_id/edit #get = view for update
+/crud # get = list
+/crud/new # get = view for create
+/crud/:crud_id # get = show
+/crud/:crud_id/edit # get = view for update
 /FrequentlyAskedQuestions # via myRoutes.faq
 ```
 
@@ -134,14 +132,12 @@ myRoutes._newAlias({
 
 ```coffeescript
 myRoutes = trocha()
-myRoutes._newRoute {
+myRoutes._newRoute
 	name: "hello"
 	id: "name"
-}
-myRoutes._newAlias {
+myRoutes._newAlias
 	name: "faq"
 	alias: "FrequentlyAskedQuestions"
-}
 ```
 
 > This should generate:
@@ -173,38 +169,37 @@ myRoutes.crud.show.path({
 	query:{guest:"true"}
 });
 myRoutes.crud.edit.path();
-myRoutes.faq; //This will change for path()
+myRoutes.faq; // This will change for path()
 ```
 
 ```coffeescript
 myRoutes.index.path()
 myRoutes.contact.path()
-myRoutes.hello.path {name: "World"}
+myRoutes.hello.path name: "World"
 myRoutes.crud.list.path()
 myRoutes.crud.new.path()
-myRoutes.crud.show.path{
+myRoutes.crud.show.path
 	crud_id: "ASD"
-	query: {guest: "true"}
-}
+	query: guest: "true"
 myRoutes.crud.edit.path()
-myRoutes.faq #This will change for path()
+myRoutes.faq # This will change for path()
 ```
 
 > This should generate:
 
 ```bash
-/ # Not in 0.1.2 tag
+ # Empty string
 /contact
 /hello/World
-/crud #get = list
-/crud/new #get = view for create
-/crud/ASD?guest=true #get = show
-/crud/:crud_id/edit #get = view for update
+/crud # get = list
+/crud/new # get = view for create
+/crud/ASD?guest=true # get = show
+/crud/:crud_id/edit # get = view for update
 /FrequentlyAskedQuestions # via myRoutes.faq
 ```
 
 To print any of your routes simply use `path()` function at the end of the route.
 See [Route printing parameters](#204-route-printing-parameters)
 <aside class="warning">
-Note for `0.1.2` tag, alias print without the path function, this will change in future releases
+Note for `0.1.3` tag, alias print without the path function, this will change in future releases
 </aside>
