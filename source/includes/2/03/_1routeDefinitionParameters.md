@@ -22,6 +22,18 @@ myRoutes = trocha( {
 				$method: trocha.PATCH // This can be part of a (custom) resource ;)
 			}
 		},
+		ninja: { // see 300 - Real World applications > Advance ID handling
+			$id: "ninja_shadow",
+			$justId: true,
+			flying_shuriken: {
+				$parentId: false,
+				$id: 'shuriken_id'
+			},
+			silent_knife: { // note it does the same as Previous example, but more presise
+				ninja_shadow: false,
+				$id: 'knife_id'
+			}
+		}
 	}
 });
 console.log(myRoutes.home.path());
@@ -29,6 +41,9 @@ console.log(myRoutes.The.quick.brown.path());
 console.log(myRoutes.The.quick.brown.fox.jumps.over.the.lazy.dog.path());
 console.log(myRoutes.people.update.path());
 console.log(myRoutes.people.update.$method);
+console.log(myRoutes.ninja.path());
+console.log(myRoutes.ninja.flying_shuriken.path({shuriken_id: 'the·distracting·one'}));
+console.log(myRoutes.ninja.silent_knife.path({knife_id: 'the·killer·one'}));
 ```
 
 ```coffeescript
@@ -49,12 +64,24 @@ myRoutes = trocha
 			update:
 				$hide: true # The "update" will be hidden
 				$method: trocha.PATCH # This can be part of a (custom) resource ;)
+		ninja: # see 300 - Real World applications > Advance ID handling
+			$id: "ninja_shadow"
+			$justId: true
+			flying_shuriken:
+				$parentId: false
+				$id: 'shuriken_id'
+			silent_knife: # note it does the same as Previous example, but more presise
+				ninja_shadow: false
+				$id: 'knife_id'
 
 console.log myRoutes.home.path()
 console.log myRoutes.The.quick.brown.path()
 console.log myRoutes.The.quick.brown.fox.jumps.over.the.lazy.dog.path()
 console.log myRoutes.people.update.path()
 console.log myRoutes.people.update.$method
+console.log myRoutes.ninja.path()
+console.log myRoutes.ninja.flying_shuriken.path shuriken_id: 'the·distracting·one'
+console.log myRoutes.ninja.silent_knife.path knife_id: 'the·killer·one'
 ```
 > This should print:
 
@@ -62,6 +89,9 @@ console.log myRoutes.people.update.$method
 /home
 /people/:name
 PATCH
+/:ninja_shadow
+/flying_shuriken/the·distracting·one
+/silent_knife/the·killer·one
 /The/quick/brown
 /The/quick/brown/fox/jumps/over/the/lazy/dog
 ```
@@ -78,12 +108,17 @@ A trivial example: `routes:{<name>:{...route parameters...}, <name>:"<alias>"}`
 
 Each route type suport diferent parameters, here a list on how to use:
 
-           | route     | resource  | scope     | alias     | Type   | What does
----------- | --------- | --------- | --------- | --------- | ------ | -----------------
-$name (*)  | Mandatory | Mandatory | Mandatory | Mandatory | String | the name of this part of the path
-$id        | Optional  | Mandatory | NA        | NA        | String | A modificable ID_name see [Best practices](#301-best-practices)
-$hide      | Optional  | NA        | NA        | NA        | Bool   | Hide the actual name of this part of the path (ideal for indexs)
-$method    | Optional  | NA        | NA        | NA        | String | Define wich method will be used when requested this path
-$alias (*) | NA        | NA        | NA        | Mandatory | String | An String that replace the name
+           | route     | resource  | scope     | alias     | Type        | What does
+---------- | --------- | --------- | --------- | --------- | ----------- | -----------------
+$name (*)  | Mandatory | Mandatory | Mandatory | Mandatory | String      | the name of this part of the path
+$alias (*) | NA        | NA        | NA        | Mandatory | String      | An String that replace the name
+$id        | Optional  | Mandatory | NA        | NA        | String      | A modificable ID_name see [Best practices](#301-best-practices)
+$method    | Optional  | NA        | NA        | NA        | String      | Define wich method will be used when requested this path
+$hide      | Optional  | NA        | NA        | NA        | Bool(True)  | If true hide the actual name of this part of the path (ideal for indexs)
+$justId    | Optional  | Optional  | Optional  | NA        | Bool(True)  | Same as $hide but needs $id
+$parent_id | Optional  | Optional  | Optional  | NA        | Bool(False) | If false the parent id will be absent, can be Override in path()
+\<Id\>     | Optional  | Optional  | Optional  | NA        | Bool(False) | If false the id will be absent, can be Override in path()
+
+Note if `$hide` or `$justId` are false will do nothing, same goes to `$parent_id` or `\<Id\>` if true
 
 (\*) Also note `name` and `alias` are only used when the route is defined vía method
