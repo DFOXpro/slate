@@ -11,7 +11,7 @@ There are 4 type of routes (see [Constants](#202-constants)):
 ## Route
 
 ```javascript
-const myRoutes = trocha( {
+const myRoutes = new Trocha( {
 	routes: {
 		person: {
 			$id: "name",
@@ -21,7 +21,7 @@ const myRoutes = trocha( {
 	}
 });
 //OR
-let myRoutes = trocha();
+let myRoutes = new Trocha();
 myRoutes._newRoute( {
 	name: "person",
 	hide: true,
@@ -33,14 +33,14 @@ myRoutes.person._newRoute( {
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		person:
 			$id: "name"
 			$hide: true
 			attributes: {}
 #OR
-myRoutes = trocha()
+myRoutes = new Trocha()
 myRoutes._newRoute
 	name: "person"
 	hide: true
@@ -64,16 +64,16 @@ The simplest and base for any other type, it represent: `<name>/[:<id>]`(`id` is
 ## Resource
 
 ```javascript
-const myRoutes = trocha( {
+const myRoutes = new Trocha( {
 	routes: {
 		products: {
-			$type: trocha.RESOURCE,
+			$type: Trocha.RESOURCE,
 			$id: "product_id"
 		}
 	}
 });
 //OR
-let myRoutes = trocha();
+let myRoutes = new Trocha();
 myRoutes._newResource( {
 	name: "products",
 	id: "product_id"
@@ -81,13 +81,13 @@ myRoutes._newResource( {
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		products:
-			$type: trocha.RESOURCE
+			$type: Trocha.RESOURCE
 			$id: "product_id"
 #OR
-myRoutes = trocha()
+myRoutes = new Trocha()
 myRoutes._newResource
 	name: "products",
 	id: "product_id"
@@ -108,157 +108,215 @@ Is a configurable set of routes, ideal for CRUD routes:
 * The default routes are (useful for views POV):
 	* `list(): <name>`
 	* `new(): <name>/new`
-  * `show({id}): <name>/:<id>`
-  * `edit({id}): <name>/:<id>/edit`
+	* `show({id}): <name>/:<id>`
+	* `edit({id}): <name>/:<id>/edit`
+
+This kind of routes is useful also for RESTful request
+<aside class="warning">
+Avoid using the resource base route, use instead (in this example) `products.list.path()` instead of `products.path()`
+</aside>
 
 ## Custom resource
 
 ```javascript
-apiResource = trocha.$RESOURCE; // Note the $, this is an object not the String
+apiResource = new Trocha.$RESOURCE; // Note the $, this is an object not the String
 delete apiResource.new;
 delete apiResource.edit;
-//apiResource.show = {$hide: true}; // Already defined
-apiResource.list = {$id: false, $hide: true}; // Override $hide: true
-apiResource.create = {$hide: true, $id: false, $method: trocha.POST};
-apiResource.update = {$hide: true, $method: trocha.PATCH};
-apiResource.delete = {$hide: true, $method: trocha.DELETE};
+delete apiResource.show;
+apiResource.list = {$id: false}; // Override/Remove $hide: true
+apiResource.create = {$hide: true, $id: false, $method: Trocha.POST};
+apiResource.read = {$hide: true};
+apiResource.update = {$hide: true, $method: Trocha.PATCH};
+apiResource.delete = {$hide: true, $method: Trocha.DELETE};
 
-serverRoutes = trocha( {
+serverRoutes = new Trocha( {
 	domain: 'https://myRESTfulAPI.net.co',
 	post: '.json',
 	alwaysPost: true,
 	alwaysUrl: true,
-	resource: apiResource,
+	// customSelector: 'ñ',
 	routes: {
 		products: {
-			$type: trocha.RESOURCE, // Note this is String
+			$type: Trocha.RESOURCE, // Note this is String
 			$id: 'product_id'
+			$resource: apiResource
 		}
 	}
 });
 ```
 
 ```coffeescript
-apiResource = trocha.$RESOURCE # Note the $, this is an object not a String
+apiResource = new Trocha.$RESOURCE # Note the $, this is an object not a String
 delete apiResource.new
 delete apiResource.edit
-# apiResource.show = {$hide: true} # Already defined
+delete apiResource.show
 apiResource.list = {$id: false} # Override $hide: true
-apiResource.create = {$hide: true, $id: false, $method: trocha.POST}
-apiResource.update = {$hide: true, $method: trocha.PATCH}
-apiResource.delete = {$hide: true, $method: trocha.DELETE}
+apiResource.create = {$hide: true, $id: false, $method: Trocha.POST}
+apiResource.read = {$hide: true}
+apiResource.update = {$hide: true, $method: Trocha.PATCH}
+apiResource.delete = {$hide: true, $method: Trocha.DELETE}
 
-serverRoutes = trocha
+serverRoutes = new Trocha
 	domain: 'https://myRESTfulAPI.net.co'
 	post: '.json'
 	alwaysPost: true
 	alwaysUrl: true
-	resource: apiResource
+	# customSelector: 'ñ'
 	routes:
 		products:
-			$type: trocha.RESOURCE # Note this is String (whitout the $ prefix)
+			$type: Trocha.RESOURCE # Note this is String (whitout the $ prefix)
 			$id: 'product_id'
+			$resource: apiResource
 ```
 
 > This should generate:
 
 ```bash
-https://myRESTfulAPI.net.co/products/:product_id.json # get
-https://myRESTfulAPI.net.co/products/list.json # get
-https://myRESTfulAPI.net.co/products.json # post
-https://myRESTfulAPI.net.co/products/:product_id.json # patch
-https://myRESTfulAPI.net.co/products/:product_id.json # delete
+https://myRESTfulAPI.net.co/products/list.json # list with method get
+https://myRESTfulAPI.net.co/products.json # create with method post
+https://myRESTfulAPI.net.co/products/:product_id.json # read with method get
+https://myRESTfulAPI.net.co/products/:product_id.json # update with method patch
+https://myRESTfulAPI.net.co/products/:product_id.json # delete with method delete
 ```
 
 You can create your customs resources, ideal for RESTful apis (see
 [Best practices](#301-best-practices),
-[Methods](#205-methods) and
+[Methods](#205-methods-amp-attributes) and
 [Constants](#202-constants)
 )
 
-When you're defining your trocha object add an `resource` object, it will be use has reference for any resource within this trocha object.
+When you're defining your trocha object add a `resource` object, it will be use has reference for any resource within this trocha object.
 
-* You can copy and modify default resource at `trocha.$RESOURCE`
+* You can copy and modify default resource at `Trocha.$RESOURCE` or with [customSelector](#amp-customselector) at `serverRoutes.ñRESOURCE`
 
 ## Scope
 
 ```javascript
-const myRoutes = trocha( {
+const myRoutes = new Trocha( {
 	routes: {
-		portal: {
-			$type: trocha.SCOPE,
+		language: {
+			$type: Trocha.SCOPE,
+			id: "language_id",
 			dashboard: {}
 		}
 	}
 });
 //OR
-let myRoutes = trocha();
-myRoutes._newScope({name: "portal"});
-myRoutes.portal._newRoute({name: "dashboard"});
+let myRoutes = new Trocha();
+myRoutes._newScope({name: "language", id: "language_id"});
+myRoutes.language._newRoute({name: "dashboard"});
+
+console.log(myRoutes.language.dashboard.path({language_id: 'esBO'}));
+console.log(myRoutes.dashboard.path());
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
-		portal:
-			$type: trocha.SCOPE
+		language:
+			$type: Trocha.SCOPE
+			id: "language_id"
 			dashboard: {}
 #OR
-myRoutes = trocha()
-myRoutes._newScope name: "portal"
-myRoutes.portal._newRoute name: "dashboard"
+myRoutes = new Trocha()
+myRoutes._newScope name: "language", id: "language_id"
+myRoutes.language._newRoute name: "dashboard"
+
+console.log myRoutes.language.dashboard.path language_id: 'esBO'
+console.log myRoutes.dashboard.path()
 ```
 
-> This should generate:
+> This should print:
 
 ```bash
-/portal/dashboard
+/esBO/dashboard
+/dashboard
 ```
 
-Is just a level of the route tree.
+Is an optional level of the route tree.
 
+* It require an `ID`
+* It by default inits with `justId: true`
 * Does not offer `path()`.
+* generate the same child tree for the parent
 * Can be parent of any kind of other routes.
 
 ## Alias
 
 
 ```javascript
-const cdns = trocha( {
+const cdns = new Trocha( {
 	routes: {
 		// This is a cool vanilla views/routing system more @ http://mtrpcic.net/pathjs/
 		pathjs: "https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js"
+		images: {
+			$type: Trocha.ALIAS,
+			$alias: "https://cdn.mydomain.io/images",
+			$id: "image_token",
+			desktop: 'full_size_for_desktop'
+		}
 	}
 });
 //OR
-let cdns = trocha();
+let cdns = new Trocha();
 cdns._newAlias( {
 	name: "pathjs",
 	alias: "https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js"
 });
-console.log(cdns.pathjs);
+cdns._newAlias( {
+	name: "images",
+	alias: "https://cdn.mydomain.io/images",
+	$id: "image_token"
+});
+cdns.images._newAlias({
+	name: "desktop",
+	alias: "full_size_for_desktop"
+})
+console.log(cdns.pathjs.path());
+console.log(cdns.images.path({image_token: 'car.jpg'}));
+console.log(cdns.images.desktop.path({query:{colour:'mono'}}));
 ```
 
 ```coffeescript
-cdns = trocha
+cdns = new Trocha
 	routes:
 		# This is a cool vanilla views/routing system more @ http://mtrpcic.net/pathjs/
-		pathjs: "https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js"
+		pathjs: 'https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js'
+		images:
+			$type: Trocha.ALIAS
+			$alias: 'https://cdn.mydomain.io/images'
+			$id: 'image_token'
+			desktop: 'full_size_for_desktop'
 #OR
-cdns = trocha()
+cdns = new Trocha()
 cdns._newAlias
-	name: "pathjs"
-	alias: "https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js"
-console.log cdns.pathjs
+	name: 'pathjs'
+	alias: 'https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js'
+cdns._newAlias
+	name: 'images'
+	$id: 'image_token'
+	alias: 'https://cdn.mydomain.io/images'
+cdns.images._newAlias
+	name: 'desktop'
+	alias: 'full_size_for_desktop'
+
+console.log cdns.pathjs.path()
+console.log cdns.images.path image_token: 'car.jpg'
+console.log cdns.images.desktop.path query: colour:'mono'
 ```
 
 > This should print:
 
 ```bash
 https://cdn.rawgit.com/mtrpcic/pathjs/master/path.min.js
+https://cdn.mydomain.io/images/car.jpg
+https://cdn.mydomain.io/images/:image_token/full_size_for_desktop?colour=mono
 ```
 
 This type of route can render an specific string independent of the name, it's usefull to print cdns and very long and isolated paths
-<aside class="warning">
-Note for `0.1.3` tag, alias print without the path function, this will change in future releases
+
+* It can be created by an string in the constructor.
+* Can be parent of any kind of other routes.
+<aside class="info">
+Note since `0.2.0` tag, alias print with the path function
 </aside>

@@ -8,7 +8,7 @@ Attributes have the default prefix `$` to change see [$ & custom selector](#amp-
 
 ## $name
 ```javascript
-myRoutes = trocha( {
+myRoutes = new Trocha( {
 	routes: {
 		country: {
 			state: {
@@ -22,7 +22,7 @@ console.log(myRoutes.country.state.city.town.$name);
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		country:
 			state:
@@ -43,7 +43,7 @@ town
 
 ## $as
 ```javascript
-myRoutes = trocha( {
+myRoutes = new Trocha( {
 	routes: {
 		country: {
 			state: {
@@ -57,7 +57,7 @@ console.log(myRoutes.country.state.city.town.$as);
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		country:
 			state:
@@ -83,11 +83,11 @@ If you know the Ruby(language) Rails(framework) routes(gem) as(attribute) it wor
 
 ## $method
 ```javascript
-serverRoutes = trocha( {
+serverRoutes = new Trocha( {
 	routes: {
 		students: {
-			$method: trocha.GET,
-			create: { $method: trocha.POST}}
+			$method: Trocha.GET,
+			create: { $method: Trocha.POST}}
 	}
 });
 console.log(serverRoutes.students.$method);
@@ -95,11 +95,11 @@ console.log(serverRoutes.students.create.$method);
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		students:
-			$method: trocha.GET
-			create: $method: trocha.POST
+			$method: Trocha.GET
+			create: $method: Trocha.POST
 console.log myRoutes.students.$method
 console.log myRoutes.students.create.$method
 ```
@@ -119,13 +119,13 @@ This attribute is really useful if you want to make XHR (ajax) calls, see [JQuer
 
 ### _new\<Route type\>
 ```javascript
-let myRoutes = trocha();
+let myRoutes = new Trocha();
 myRoutes._newRoute({
 	name: "person",
 	// Optionals
 	id: "name",
 	hide: true,
-	method: trocha.PUT
+	method: Trocha.PUT
 });
 myRoutes._newScope({
 	name: "language",
@@ -150,13 +150,13 @@ myRoutes._newAlias({
 ```
 
 ```coffeescript
-myRoutes = trocha()
+myRoutes = new Trocha()
 myRoutes._newRoute {
 	name: "person"
 	# Optionals
 	id: "name"
 	hide: true
-	method: trocha.PUT
+	method: Trocha.PUT
 }
 myRoutes._newScope {
 	name: "language"

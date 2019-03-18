@@ -1,11 +1,11 @@
 ## $ & customSelector
 ```javascript
-myRoutes = trocha( {
+myRoutes = new Trocha( {
 	customSelector: 'TRCH',
 	routes: {
 		hello: {
 			TRCHid: 'name',
-			TRCHmethod: trocha.GET,
+			TRCHmethod: Trocha.GET,
 			$id: {}
 		}
 	}
@@ -18,12 +18,12 @@ console.log(myRoutes.hello.$id.path());
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	customSelector: 'TRCH'
 	routes:
 		hello:
 			TRCHid: 'name'
-			TRCHmethod: trocha.GET
+			TRCHmethod: Trocha.GET
 			$id: {}
 console.log myRoutes.hello.path {name: 'World'}
 console.log myRoutes.hello.TRCHid

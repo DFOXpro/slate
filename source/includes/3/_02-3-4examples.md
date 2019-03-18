@@ -133,10 +133,10 @@ app.directive 'thref', () ->
 app.factory('$trocha', [
 	'$http',
 	($http) => {
-		var $trocha = trocha;
-		$trocha.CLIENT = ROUTES.CLIENT;
-		$trocha.SERVER = ROUTES.SERVER;
-		$trocha.xhr = (route, path, data) => {
+		var $trocha = new Trocha;
+		$Trocha.CLIENT = ROUTES.CLIENT;
+		$Trocha.SERVER = ROUTES.SERVER;
+		$Trocha.xhr = (route, path, data) => {
 			let args = {
 				url: route.path(path),
 				method: route.$method
@@ -152,10 +152,10 @@ app.factory('$trocha', [
 app.factory '$trocha', [
 	'$http',
 	($http) ->
-		$trocha = trocha;
-		$trocha.CLIENT = ROUTES.CLIENT
-		$trocha.SERVER = ROUTES.SERVER
-		$trocha.xhr = (route, path, data) ->
+		$trocha = new Trocha;
+		$Trocha.CLIENT = ROUTES.CLIENT
+		$Trocha.SERVER = ROUTES.SERVER
+		$Trocha.xhr = (route, path, data) ->
 			args =
 				url: route.path path
 				method: route.$method
@@ -194,9 +194,9 @@ app.config [
 app.controller(ROUTES.CLIENT.the.client.route.$as, [
 	'$scope', '$trocha', function($scope, $trocha) {
 		$scope.data = {
-			routes: $trocha.CLIENT
+			routes: $Trocha.CLIENT
 		};
-		$trocha.xhr($trocha.SERVER.the.server.route, {path args...}, {data...})
+		$Trocha.xhr($Trocha.SERVER.the.server.route, {path args...}, {data...})
 		.then(xhrSuccess, xhrFail);
 	}
 ]);
@@ -205,8 +205,8 @@ app.controller(ROUTES.CLIENT.the.client.route.$as, [
 app.controller ROUTES.CLIENT.the.client.route.$as, [
 	'$scope', '$trocha', ($scope, $trocha) ->
 		$scope.data =
-			routes: $trocha.CLIENT
-		$trocha.xhr $trocha.SERVER.the.server.route, {path args...}, {data...}
+			routes: $Trocha.CLIENT
+		$Trocha.xhr $Trocha.SERVER.the.server.route, {path args...}, {data...}
 		.then xhrSuccess, xhrFail
 ]
 ```

@@ -1,11 +1,11 @@
 # 202 - Constants
 
 ```javascript
-console.log(trocha.GET);
+console.log(Trocha.GET);
 ```
 
 ```coffeescript
-console.log trocha.GET
+console.log Trocha.GET
 ```
 
 > This should print:
@@ -14,46 +14,54 @@ console.log trocha.GET
 GET
 ```
 
-The Trocha constructor also offers a set of useful constants, to call those constants simply write `trocha.<CONST_NAME>`.
+The Trocha class also offers a set of useful constants, to call those constants simply write `Trocha.<CONST_NAME>` or within the module include `import {Trocha, GET, ROUTE, $RESOURCE} from 'trocha'`.
+
 <aside class="notice">
-Some constants have the prefix `$` this means it's not an String
+Some constants have the prefix `$` this means it's an object not an string
 </aside>
 
 ## Route types names
 ```javascript
-const ROUTES = trocha({
+const ROUTES = new Trocha({
 	routes:{
 		route_a: {
-			$type: trocha.ROUTE // Not necesary
+			$type: Trocha.ROUTE // Not necesary
 		},
 		route_b: {},
 		scope: {
-			$type: trocha.SCOPE
+			$type: Trocha.SCOPE
 		},
 		resource: {
-			$type: trocha.RESOURCE
+			$type: Trocha.RESOURCE
 		},
-		alias: "theAlias"
+		alias: { // if alias don't have child, should be use the alias string directly
+			$type: Trocha.ALIAS,
+			$alias: "theAlias"
+		}
 	}
 });
 ```
 ```coffeescript
-ROUTES = trocha
+ROUTES = new Trocha
 	routes:
 		route_a:
-			$type: trocha.ROUTE # Not necesary
+			$type: Trocha.ROUTE # Not necesary
 		route_b: {}
 		scope:
-			$type: trocha.SCOPE
+			$type: Trocha.SCOPE
 		resource:
-			$type: trocha.RESOURCE
-		alias: "theAlias"
+			$type: Trocha.RESOURCE
+		alias: # if alias don't have child, should be use the alias string directly
+			$type: Trocha.ALIAS
+			$alias: "theAlias"
 ```
 
-There are 4 type of routes implemented in trocha but only 2 route type names need to be use:
+There are 4 type of routes implemented in trocha but only 2 route type names normally is needed to be use:
 
-* `trocha.SCOPE`
-* `trocha.RESOURCE`
+* `Trocha.SCOPE`
+* `Trocha.RESOURCE`
+* `Trocha.ALIAS`
+* `Trocha.ROUTE`
 
 The other 2 can be defined via:
 
@@ -68,13 +76,13 @@ See [Type of routes](#201-type-of-routes).
 
 ```javascript
 const ROUTES = {
-	SERVER: trocha({
+	SERVER: new Trocha({
 		domain: 'https://myRESTfulAPI.net.co',
 		alwaysUrl: true,
 		routes:{
 			users: {
 				login: {
-					$method: trocha.PATCH
+					$method: Trocha.PATCH
 				}
 			}
 		}
@@ -83,13 +91,13 @@ const ROUTES = {
 ```
 
 ```coffeescript
-ROUTES.SERVER = trocha
+ROUTES.SERVER = new Trocha
 	domain: 'https://myRESTfulAPI.net.co'
 	alwaysUrl: true
 	routes:
 		users:
 			login:
-				$method: trocha.PATCH
+				$method: Trocha.PATCH
 ```
 
 > This should generate:
@@ -136,38 +144,44 @@ $http
 
 There are 9 HTTP request methods names implemented in trocha:
 
-* `trocha.GET`
-* `trocha.POST`
-* `trocha.PATCH`
-* `trocha.DELETE`
-* `trocha.HEAD`
-* `trocha.PUT`
-* `trocha.CONNECT`
-* `trocha.OPTIONS`
-* `trocha.TRACE`
+* `Trocha.GET`
+* `Trocha.POST`
+* `Trocha.PATCH`
+* `Trocha.DELETE`
+* `Trocha.HEAD`
+* `Trocha.PUT`
+* `Trocha.CONNECT`
+* `Trocha.OPTIONS`
+* `Trocha.TRACE`
 
 Those names are usefull when you're using the route object to point a RESTful server see [Angular 1.X implentation](#304-angular-1-x)
 You can set/get the method name of any of your routes via the `$method` param/attribute.
 Remember the objective of trocha is to avoid the use of repetitive or unmantenable Strings
 
+* For any Route or Alias default $method is `GET`
+* Scopes and Resource base routes has no $method
+* It's interacting with customSelector so `<customSelector>method` to set and get this attribute
+
 ## Resource base object
 
 ```javascript
-(=> {
-	trocha.$RESOURCE
-})()
+var myResource = Trocha.$RESOURCE
+const ROUTES = new Trocha({customSelector: 'TC_'})
+var myOtherResource = ROUTES.TC_RESOURCE
+
 ```
 
 ```coffeescript
-(->
-	trocha.$RESOURCE
-)()
+myResource = Trocha.$RESOURCE
+ROUTES = new Trocha customSelector: 'TC_'
+myOtherResource = ROUTES.TC_RESOURCE
 ```
 
-> This should return an object:
+> This should generate:
 
 ```json
 {
+"myResource": {
 	"$id": "id",
 	"edit": {},
 	"list": {
@@ -180,7 +194,23 @@ Remember the objective of trocha is to avoid the use of repetitive or unmantenab
 	"show": {
 		"$hide": true
 	}
-}
+},
+"myOtherResource": {
+	"TC_id": "id",
+	"edit": {},
+	"list": {
+		"TC_hide": true,
+		"TC_id": false
+	},
+	"new": {
+		"TC_id": false
+	},
+	"show": {
+		"TC_hide": true
+	}
+}}
 ```
 
-`trocha.$RESOURCE` This routes tree (object like the `routes: {...}` you do) define how any resource will be created within this trocha object, you can modify this object if you want to create [Custom resources](#custom-resource)
+`Trocha.$RESOURCE` This routes tree (object like the `routes: {...}` you do) define how any resource will be created within this trocha object, you can modify this object if you want to create [Custom resources](#custom-resource)
+
+ * It’s interacting with customSelector so `<customSelector>RESOURCE` to get this object

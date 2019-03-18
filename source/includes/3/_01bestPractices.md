@@ -4,13 +4,13 @@
 > BAD idea
 
 ```html
-<script src="https://cdn.rawgit.com/DFOXpro/trocha/master/dist/trocha.min.js"></script>
+<script src="https://cdn.rawgit.com/DFOXpro/trocha/master/dist/Trocha.min.js"></script>
 ```
 
 > GOOD idea
 
 ```html
-<script src="https://cdn.rawgit.com/DFOXpro/trocha/0.1.3/dist/trocha.min.js"></script>
+<script src="https://cdn.rawgit.com/DFOXpro/trocha/0.1.3/dist/Trocha.min.js"></script>
 ```
 
 Wherever you use this library never point to master branch, use always an especific version of the library.
@@ -23,12 +23,12 @@ Any change between versions (releases, revision, etc) may change the behavior of
 > BAD idea
 
 ```javascript
-let myRoutes = trocha();
+let myRoutes = new Trocha();
 myRoutes._newRoute({args...});
 ...
 ```
 ```coffeescript
-myRoutes = trocha()
+myRoutes = new Trocha()
 myRoutes._newRoute {args...}
 ...
 ```
@@ -37,12 +37,12 @@ myRoutes._newRoute {args...}
 > GOOD idea
 
 ```javascript
-const myRoutes = trocha({
+const myRoutes = new Trocha({
 	routes: {... my routes ...}
 });
 ```
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes: {... my routes ...}
 ```
 
@@ -58,12 +58,12 @@ Always use the JSON constructor to declarate the routes tree, avoid the creation
 > BAD idea
 
 ```javascript
-let myRoutes = trocha({
+let myRoutes = new Trocha({
 	routes: {... my routes ...}
 });
 ```
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes: {... my routes ...}
 ...
 ```
@@ -72,16 +72,16 @@ myRoutes = trocha
 > GOOD idea
 
 ```javascript
-const myRoutes = trocha({
+const myRoutes = new Trocha({
 	routes: {... my routes ...}
 });
 ```
 ```coffeescript
-const myRoutes = trocha {... my routes ...} # for CS2
+const myRoutes = new Trocha {... my routes ...} # for CS2
 
 # for coffeescript vanilla :(
 __myRoutes = {... my routes ...}
-`const myRoutes = trocha({
+`const myRoutes = new Trocha({
 	routes: __myRoutes
 });
 `
@@ -99,7 +99,7 @@ Use variable type [const](https://developer.mozilla.org/en-US/docs/Web/JavaScrip
 > BAD idea
 
 ```javascript
-const myRoutes = trocha({
+const myRoutes = new Trocha({
 	routes: {
 		client routes ...
 		serverA routes ...
@@ -108,7 +108,7 @@ const myRoutes = trocha({
 });
 ```
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		client routes ...
 		serverA routes ...
@@ -119,32 +119,32 @@ myRoutes = trocha
 > GOOD idea
 
 ```javascript
-const clientRoutes = trocha({
+const clientRoutes = new Trocha({
 	pre: '/the/templates/route',
 	post: '_the_hash_and_ext.html',
 	routes: {... client routes ...}
 });
-const serverARoutes = trocha({
+const serverARoutes = new Trocha({
 	domain: 'https://api.serverA.net.co/',
 	alwaysUrl: true,
 	routes: {... serverA routes ...}
 });
-const serverBRoutes = trocha({
+const serverBRoutes = new Trocha({
 	domain: 'https://api.serverB.net.co/',
 	alwaysUrl: true,
 	routes: {... serverB routes ...}
 });
 ```
 ```coffeescript
-clientRoutes = trocha {
+clientRoutes = new Trocha {
 	pre: '/the/templates/route'
 	post: '_the_hash_and_ext.html'
 	routes: {... client routes ...}
-serverARoutes = trocha {
+serverARoutes = new Trocha {
 	domain: 'https://api.serverA.net.co/'
 	alwaysUrl: true
 	routes: {... serverA routes ...}
-serverBRoutes = trocha {
+serverBRoutes = new Trocha {
 	domain: 'https://api.serverB.net.co/'
 	alwaysUrl: true
 	routes: {... serverB routes ...}
@@ -172,11 +172,11 @@ loadAsyncCDN 'www.myCDN.io/min.js'
 > GOOD idea
 
 ```javascript
-myCDN = trocha({routes: min: 'www.myCDN.io/min.js'});
+myCDN = new Trocha({routes: min: 'www.myCDN.io/min.js'});
 loadAsyncCDN(myCDN.min);
 ```
 ```coffeescript
-myCDN = trocha routes: min: 'www.myCDN.io/min.js'
+myCDN = new Trocha routes: min: 'www.myCDN.io/min.js'
 loadAsyncCDN myCDN.min
 ```
 

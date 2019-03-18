@@ -29,7 +29,7 @@ Note the main goal of this library is to declare routes, not to handle.
 ```
 
 ```javascript
-myRoutes = trocha( {
+myRoutes = new Trocha( {
 	routes: {
 		reports: {
 			$id: 'report_id',
@@ -45,7 +45,7 @@ myRoutes = trocha( {
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		reports:
 			$id: 'report_id'

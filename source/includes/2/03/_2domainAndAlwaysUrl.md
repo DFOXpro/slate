@@ -1,6 +1,6 @@
 ## Domain & Always Url
 ```javascript
-serverRoutes = trocha( {
+serverRoutes = new Trocha( {
 	domain: 'https://mydomain.net.co',
 	alwaysUrl: true,
 	routes: {
@@ -11,7 +11,7 @@ console.log(serverRoutes.home.path());
 ```
 
 ```coffeescript
-serverRoutes = trocha
+serverRoutes = new Trocha
 	domain: 'https://mydomain.net.co'
 	alwaysUrl: true
 	routes: home: {}

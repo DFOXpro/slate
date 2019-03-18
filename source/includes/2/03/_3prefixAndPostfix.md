@@ -1,6 +1,6 @@
 ## Prefix & postfix string
 ```javascript
-templateRoutes = trocha( {
+templateRoutes = new Trocha( {
 	pre: '/templates', // note the /
 	post: '-myH45H.html',
 	alwaysPost: true,
@@ -15,7 +15,7 @@ console.log(templateRoutes.home.path({ext: true})); // only if alwaysPost is not
 ```
 
 ```coffeescript
-templateRoutes = trocha
+templateRoutes = new Trocha
 	pre: '/templates' # note the /
 	post: '-myH45H.html'
 	alwaysPost: true

@@ -6,6 +6,7 @@ language_tabs:
   - coffeescript
 
 toc_footers:
+  - <a href='https://dfoxpro.github.io/trochaJS/0.1.3'>Old 0.1.3 docs</a>
   - <a href='#100-contributing'>Español</a>
   - <a href='#100-contributing'>English</a>
   - <a href='#100-contributing'>Français</a>
@@ -33,12 +34,12 @@ search: true
 
 # TrochaJS
 It's a standalone javascript library that describe route listing.
-Ideal for client-side route management and NodeJS route declaration.
+Ideal for client-side route management (SPAs and XHR/Ajax async request) and NodeJS route declaration.
 
 see our [Hello Wolrd code example](#101-intro-to-trocha-js) to lear more.
 
 ### What it does
-**print** clean routes for your javascript projects and even help `<your favorite>` framework to **describe** your app routes.
+**print** clean routes for your javascript projects and even help `<your favorite>` (framework/set of libraries) to **describe** your app routes.
 
 ### What it does not
 **handle** route/view for your app nor framework.

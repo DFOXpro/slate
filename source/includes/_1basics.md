@@ -1,25 +1,36 @@
 # 100 - Basics
 # 101 - Intro to Trocha JS
 
-> Get a copy of the library via bower
+> Get a copy of the library via npm
 
 ```
-bower install -S trocha#0.1.3
+npm i trocha
 ```
 
 > Insert the library within your page
+
 ```html
 <body>
 ...Your page tags
-<script src="https://cdn.rawgit.com/DFOXpro/trocha/0.1.3/dist/trocha.min.js"></script>
+<script src="https://<aCDN>/trocha/0.2.0/dist/trocha_library.min.js"></script>
 ...Your other scripts
 </body>
+```
+
+> Or via ES6 modules
+
+```javascript
+import {Trocha} from 'trocha'
+```
+
+```coffeescript
+import {Trocha} from 'trocha'
 ```
 
 > Now define routes
 
 ```javascript
-var myRoutes = trocha({
+var myRoutes = new Trocha({
 	routes:{
 		hello:{
 			$id: "name"
@@ -29,7 +40,7 @@ var myRoutes = trocha({
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		hello:
 			$id: "name"
@@ -57,8 +68,10 @@ console.log myroutes.hello.path name: "World"
 
 Welcome to Trocha JS routes engine, the main goal of this library is to prevent use of annoing/unmantenible strings in sources(JS) and markup(HTML) files of your big projects.
 
-This library does not depend of any other library/framework but can be integrated in those (AngularJS 1.X for example), also can be used on node and any mayor browser.
-
+This library does not depend of any other library/framework but can be integrated in those (React/Vue/Angular/Vanilla for example), also can be used on node and any mayor browser.
+<aside class="info">
+Note since `0.2.0` tag, Trocha is a class so now is Capitalize and use 'new' on init `new Trocha()`
+</aside>
 
 # 102 - Defining routes
 
@@ -67,7 +80,7 @@ You can define routes tree with a simple JSON when initialize or after that with
 ## Via JSON constructor
 
 ```javascript
-const myRoutes = trocha( {
+const myRoutes = new Trocha( {
 	routes: {
 		index: {
 			$hide: true
@@ -77,16 +90,16 @@ const myRoutes = trocha( {
 			$id: "name"
 		},
 		crud: {
-			$type: trocha.RESOURCE,
+			$type: Trocha.RESOURCE,
 			$id: "crud_id"
 		},
-		faq: "FrequentlyAskedQuestions"
+		faq: "/FrequentlyAskedQuestions"
 	}
 });
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		index:
 			$hide: true
@@ -94,9 +107,9 @@ myRoutes = trocha
 		hello:
 			$id: "name"
 		crud:
-			$type: trocha.RESOURCE
+			$type: Trocha.RESOURCE
 			$id: "crud_id"
-		faq: "FrequentlyAskedQuestions"
+		faq: "/FrequentlyAskedQuestions"
 ```
 
 > This should generate:
@@ -114,30 +127,30 @@ myRoutes = trocha
 
 This is the recomended way to define your routes tree, when create your trocha object simply add a `routes` object tree.
 
-Note the `$` prefix this is used to separate trocha especific inputs of route names, this can be change see [Route definition parameters](#202-route-definition-parameters).
+Note the `$` prefix this is used to separate trocha especific inputs of route names, this can be change see [Route definition parameters](#203-route-definition-parameters).
 
 ## Via method
 
 ```javascript
-let myRoutes = trocha();
+let myRoutes = new Trocha();
 myRoutes._newRoute({
 	name: "hello",
 	id: "name"
 });
 myRoutes._newAlias({
 	name: "faq",
-	alias: "FrequentlyAskedQuestions"
+	alias: "/FrequentlyAskedQuestions"
 });
 ```
 
 ```coffeescript
-myRoutes = trocha()
+myRoutes = new Trocha()
 myRoutes._newRoute
 	name: "hello"
 	id: "name"
 myRoutes._newAlias
 	name: "faq"
-	alias: "FrequentlyAskedQuestions"
+	alias: "/FrequentlyAskedQuestions"
 ```
 
 > This should generate:
@@ -149,7 +162,7 @@ myRoutes._newAlias
 
 This route definition mode can be used in any part of the code, also is usefull to change a route definition.
 <aside class="warning">
-Note `myRoutes` can't be `const`
+Note `myRoutes` should not be `const`
 </aside>
 
 Avoid this way, please see [Best practices](#301-best-practices) for depper explanation.
@@ -169,7 +182,7 @@ myRoutes.crud.show.path({
 	query:{guest:"true"}
 });
 myRoutes.crud.edit.path();
-myRoutes.faq; // This will change for path()
+myRoutes.faq.path();
 ```
 
 ```coffeescript
@@ -182,7 +195,7 @@ myRoutes.crud.show.path
 	crud_id: "ASD"
 	query: guest: "true"
 myRoutes.crud.edit.path()
-myRoutes.faq # This will change for path()
+myRoutes.faq.path()
 ```
 
 > This should generate:
@@ -200,6 +213,6 @@ myRoutes.faq # This will change for path()
 
 To print any of your routes simply use `path()` function at the end of the route.
 See [Route printing parameters](#204-route-printing-parameters)
-<aside class="warning">
-Note for `0.1.3` tag, alias print without the path function, this will change in future releases
+<aside class="info">
+Note since `0.2.0` tag, alias print with the path function
 </aside>

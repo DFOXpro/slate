@@ -1,6 +1,6 @@
 # 204 - Route printing parameters
 ```javascript
-myRoutes = trocha( {
+myRoutes = new Trocha( {
 	pre: '/templates', // note the /
 	post: '-myH45H.html',
 	domain: 'https://mydomain.net.co',
@@ -31,7 +31,7 @@ console.log(myRoutes.town.house.path({
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	pre: '/templates' # note the /
 	post: '-myH45H.html'
 	domain: 'https://mydomain.net.co'
@@ -83,10 +83,10 @@ Parameters:
 * `ext: true` (extended) print prefix and postfix.
 * `hide: true` Hide the last name of the path, if an id is setted it will appears anyway.
 * `parentId: false` Hide the parent route id.
-* `id: false` Hide the route id.
-* `<someId>: String` set the value of some id of the route.
+* `id: false` Hide the route last id, also note the last `/` is skip.
+* `<someId>: <String>|false` if `String` set the value of some id of the route, if `false` skip this id path (remove `/:someId`).
 * `query: {<attribute>:<value>}` Print a define query `?<attribute>=<value>&...`.
-* `fragment: String` Print the fragment `#<value>`.
+* `fragment: <String>` Print the fragment `#<value>`.
 
 <aside class="notice">
 Note query attributes only support one level deep.

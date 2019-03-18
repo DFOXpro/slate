@@ -3,7 +3,7 @@ When you're creating your trocha object you can set some basic parameters so whe
 
 ## Routes & its parameters
 ```javascript
-myRoutes = trocha( {
+myRoutes = new Trocha( {
 	routes: {
 		home: {}, // A simple route
 		The: { // It's supports many levels of hierarchy
@@ -19,7 +19,7 @@ myRoutes = trocha( {
 			$id: "name",
 			update: {
 				$hide: true, // The "update" will be hidden
-				$method: trocha.PATCH // This can be part of a (custom) resource ;)
+				$method: Trocha.PATCH // This can be part of a (custom) resource ;)
 			}
 		},
 		ninja: { // see 300 - Real World applications > Advance ID handling
@@ -47,7 +47,7 @@ console.log(myRoutes.ninja.silent_knife.path({knife_id: 'the·killer·one'}));
 ```
 
 ```coffeescript
-myRoutes = trocha
+myRoutes = new Trocha
 	routes:
 		home: {} # A simple route
 		The: # It's supports many levels of hierarchy
@@ -63,7 +63,7 @@ myRoutes = trocha
 			$id: "name"
 			update:
 				$hide: true # The "update" will be hidden
-				$method: trocha.PATCH # This can be part of a (custom) resource ;)
+				$method: Trocha.PATCH # This can be part of a (custom) resource ;)
 		ninja: # see 300 - Real World applications > Advance ID handling
 			$id: "ninja_shadow"
 			$justId: true
