@@ -59,7 +59,7 @@ search: true
 It's a standalone javascript library that describe route listing.
 Ideal for client-side route management (SPAs and XHR/Ajax async request) and NodeJS route declaration.
 
-see our [Hello Wolrd code example](#101-intro-to-trocha-js) to lear more.
+see our [Hello World code example](#101-intro-to-trocha-js) to lear more.
 
 ### What it does
 
