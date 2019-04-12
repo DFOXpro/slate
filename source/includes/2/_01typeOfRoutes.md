@@ -317,6 +317,8 @@ This type of route can render an specific string independent of the name, it's u
 
 * It can be created by an string in the constructor.
 * Can be parent of any kind of other routes.
+
+You can also use alias like a obfuscation/minification option for magle childs
 <aside class="info">
 Note since `0.2.0` tag, alias print with the path function
 </aside>

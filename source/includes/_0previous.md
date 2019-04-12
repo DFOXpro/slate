@@ -17,7 +17,7 @@ myProduct.id+
 sell.quantity
 ```
 
-> Objective code example
+> Nice target code example
 
 ```javascript
 theRoute = myRoutes.product.buy.path( {
