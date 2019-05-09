@@ -6,6 +6,7 @@ language_tabs:
   - coffeescript
 
 toc_footers:
+  - <a href='https://dfoxpro.github.io/trochaJS/0_2_1/'>Old 0.2.1 docs</a>
   - <a href='https://dfoxpro.github.io/trochaJS/0_2_0/'>Old 0.2.0 docs</a>
   - <a href='https://dfoxpro.github.io/trochaJS/0_1_3/'>Old 0.1.3 docs</a>
   - <a href='#100-contributing'>Español</a>
@@ -23,6 +24,7 @@ includes:
   - 2/03/3prefixAndPostfix
   - 2/03/4idMode
   - 2/03/5customSelector
+  - 2/03/6separator
   - 2/04/1routePrintingParameters
   - 2/05/1methodsAndAttributes
   - 3/00realWorldApplications
@@ -41,14 +43,16 @@ search: true
 [![Github project](https://img.shields.io/badge/src-DFOXpro/trocha-brightgreen.svg?style=plastic&logo=Github)](https://github.com/DFOXpro/trocha)
 [![Build Status](https://img.shields.io/travis/DFOXpro/trocha.svg?logo=Travis%20CI&logoColor=FFFFFF&style=plastic)](https://travis-ci.org/DFOXpro/trocha)
 
-> [![Test Node](https://img.shields.io/badge/asserts-173/173-brightgreen.svg?style=plastic&logo=Node.js)](https://github.com/DFOXpro/trocha/tree/master/src/test)
-[![Test FX](https://img.shields.io/badge/asserts-173/173-brightgreen.svg?style=plastic&logo=Mozilla%20Firefox)](https://github.com/DFOXpro/trocha/tree/master/src/test)
-[![Test Chromium](https://img.shields.io/badge/asserts-173/173-brightgreen.svg?style=plastic&logo=Google%20Chrome)](https://github.com/DFOXpro/trocha/tree/master/src/test)
-[![Test Edge](https://img.shields.io/badge/asserts-173/173-brightgreen.svg?style=plastic&logo=Microsoft%20Edge)](https://github.com/DFOXpro/trocha/tree/master/src/test)
-[![Test IE](https://img.shields.io/badge/11%20asserts-170/173-brightgreen.svg?style=plastic&logo=Internet%20explorer&color=important)](https://github.com/DFOXpro/trocha/tree/master/src/test)
+> [![Test Node](https://img.shields.io/badge/asserts-182/182-brightgreen.svg?style=plastic&logo=Node.js)](https://github.com/DFOXpro/trocha/tree/master/src/test)
+[![Test FX](https://img.shields.io/badge/asserts-182/182-brightgreen.svg?style=plastic&logo=Mozilla%20Firefox)](https://github.com/DFOXpro/trocha/tree/master/src/test)
+[![Test Chromium](https://img.shields.io/badge/asserts-182/182-brightgreen.svg?style=plastic&logo=Google%20Chrome)](https://github.com/DFOXpro/trocha/tree/master/src/test)
+[![Test Edge](https://img.shields.io/badge/asserts-182/182-brightgreen.svg?style=plastic&logo=Microsoft%20Edge)](https://github.com/DFOXpro/trocha/tree/master/src/test)
+[![Test IE](https://img.shields.io/badge/11%20asserts-179/182-brightgreen.svg?style=plastic&logo=Internet%20explorer&color=important)](https://github.com/DFOXpro/trocha/tree/master/src/test)
 
 > [![Contact info](https://img.shields.io/badge/contact-@DFOXpro-informational.svg?style=plastic&logo=Twitter)](https://twitter.com/dfoxpro)
 [![Share info](https://img.shields.io/badge/share-%23TrochaJS-informational.svg?style=plastic&logo=Twitter)](https://twitter.com/hashtag/TrochaJS)
+
+> [New in 0.2.2: separator](#idmode) [![Commits since release](https://img.shields.io/github/commits-since/DFOXpro/trocha/0.2.1.svg?style=plastic&logo=Github)]()
 
 > [New in 0.2.1: idMode](#idmode) [![Commits since release](https://img.shields.io/github/commits-since/DFOXpro/trocha/0.2.0.svg?style=plastic&logo=Github)]()
 

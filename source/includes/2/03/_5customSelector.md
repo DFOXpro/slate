@@ -1,4 +1,5 @@
 ## $ & customSelector
+
 ```javascript
 myRoutes = new Trocha( {
 	customSelector: 'TRCH',
@@ -10,7 +11,7 @@ myRoutes = new Trocha( {
 		}
 	}
 });
-console.log(myRoutes.hello.path({name: 'World'}));
+console.log(myRoutes.hello.path({ name: "World" }));
 console.log(myRoutes.hello.TRCHid);
 console.log(myRoutes.hello.$id);
 console.log(myRoutes.hello.TRCHmethod);
@@ -31,6 +32,7 @@ console.log myRoutes.hello.$id
 console.log myRoutes.hello.TRCHmethod
 console.log myRoutes.hello.$id.path()
 ```
+
 > This should print:
 
 ```shell
@@ -40,14 +42,11 @@ Object {... trocha route object ...}
 GET
 /hello/:name/$id
 ```
-.
-<aside class="warning">
-Please dont use yet, see [related bug](https://github.com/DFOXpro/trocha/issues/4)
-</aside>
 
 If you have a route like this `/asd/$id/qwe` you will notice you can't directly set an `$id` route name, thats because by default the JSON constructor use `$` as a prefix to reserved names.
 
 If you need to use it anyway, you can overide the selector, simply add `customSelector: 'TRCH'` to your inicializer object.
+
 <aside class="notice">
 Note when you use custom selector it apply boot in constructor object and all routes object, see [Methods & attributes](#205_Methods_amp_attributes).
 </aside>
