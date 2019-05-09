@@ -52,7 +52,7 @@ search: true
 > [![Contact info](https://img.shields.io/badge/contact-@DFOXpro-informational.svg?style=plastic&logo=Twitter)](https://twitter.com/dfoxpro)
 [![Share info](https://img.shields.io/badge/share-%23TrochaJS-informational.svg?style=plastic&logo=Twitter)](https://twitter.com/hashtag/TrochaJS)
 
-> [New in 0.2.2: separator](#idmode) [![Commits since release](https://img.shields.io/github/commits-since/DFOXpro/trocha/0.2.1.svg?style=plastic&logo=Github)]()
+> [New in 0.2.2: separator](#separator) [![Commits since release](https://img.shields.io/github/commits-since/DFOXpro/trocha/0.2.1.svg?style=plastic&logo=Github)]()
 
 > [New in 0.2.1: idMode](#idmode) [![Commits since release](https://img.shields.io/github/commits-since/DFOXpro/trocha/0.2.0.svg?style=plastic&logo=Github)]()
 
